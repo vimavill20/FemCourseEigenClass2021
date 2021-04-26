@@ -20,10 +20,14 @@
     #define __PRETTY_FUNCTION__ __FUNCTION__
 #endif
 
+extern bool PanicMessage;
 
 static void DebugStop()
 {
-    std::cout << "\nYour chance to put a breakpoint here\n" << std::flush;
+    if(PanicMessage)
+    {
+        std::cout << "\nYour chance to put a breakpoint here\n" << std::flush;
+    }
     std::bad_exception myex;
     throw myex;
 

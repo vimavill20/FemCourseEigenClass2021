@@ -18,12 +18,13 @@ IntRule1d::IntRule1d(){
 
 }
 
-IntRule1d::IntRule1d(int order) {
-    if (order < 0) {
-        DebugStop();
-    }
-    SetOrder(order);
+IntRule1d::IntRule1d(int order) : IntRule(order) {
+    DebugStop();
+}
 
+void IntRule1d::SetOrder(int order) {
+    fOrder = order;
+    DebugStop();
 }
 
 void IntRule1d::gauleg(const double x1, const double x2, VecDouble &co, VecDouble &w){
@@ -58,6 +59,3 @@ void IntRule1d::gauleg(const double x1, const double x2, VecDouble &co, VecDoubl
     
 }
 
-void IntRule1d::SetOrder(int order) {
-    DebugStop();
-}
