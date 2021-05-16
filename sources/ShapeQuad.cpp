@@ -32,59 +32,13 @@ void ShapeQuad::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, Matri
         DebugStop();
     }
 
-    // Linear shape functions
-    double x[2],dx[2],y[2],dy[2];
-    x[0]  =  (1.-xi[0])/2.;
-    x[1]  =  (1.+xi[0])/2.;
-    dx[0] = -0.5;
-    dx[1] =  0.5;
-    y[0]  =  (1.-xi[1])/2.;
-    y[1]  =  (1.+xi[1])/2.;
-    dy[0] = -0.5;
-    dy[1] =  0.5;
-    phi[0]  = x[0]*y[0];
-    phi[1]  = x[1]*y[0];
-    phi[2]  = x[1]*y[1];
-    phi[3]  = x[0]*y[1];
-    dphi(0,0) = dx[0]*y[0];
-    dphi(1,0) = x[0]*dy[0];
-    dphi(0,1) = dx[1]*y[0];
-    dphi(1,1) = x[1]*dy[0];
-    dphi(0,2) = dx[1]*y[1];
-    dphi(1,2) = x[1]*dy[1];
-    dphi(0,3) = dx[0]*y[1];
-    dphi(1,3) = x[0]*dy[1];
-
-    if (orders[0]==2) {
-        int is;
-        for(is=4; is<8; is++)
-        {
-            phi[is] = phi[is%4]*phi[(is+1)%4];
-            dphi(0,is) = dphi(0,is%4)*phi[(is+1)%4]+phi[is%4]*dphi(0,(is+1)%4);
-            dphi(1,is) = dphi(1,is%4)*phi[(is+1)%4]+phi[is%4]*dphi(1,(is+1)%4);
-        }
-        phi[8] = phi[0]*phi[2];
-        dphi(0,8) = dphi(0,0)*phi[2]+phi[0]*dphi(0,2);
-        dphi(1,8) = dphi(1,0)*phi[2]+phi[0]*dphi(1,2);
-        
-        for(is=4; is<8; is++)
-        {
-            phi[is] += phi[8];
-            dphi(0,is) += dphi(0,8);
-            dphi(1,is) += dphi(1,8);
-            phi[is] *= 4.;
-            dphi(0,is) *= 4.;
-            dphi(1,is) *= 4.;
-        }
-        phi[8] *= 16.;
-        dphi(0,8) *= 16.;
-        dphi(1,8) *= 16.;
-    }
-    
+    std::cout << "Please implement me\n";
+    DebugStop();
 }
 
 /// returns the number of shape functions associated with a side
 int ShapeQuad::NShapeFunctions(int side, int order){
+    if(order < 1 || order >2) DebugStop();
     if(side<4)
         return 1;//0 a 4
     else if(side<8)
