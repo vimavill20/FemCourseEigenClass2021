@@ -26,7 +26,7 @@ class IntRuleTriangle : public IntRule
     IntRuleTriangle(int order);
   
     // Dimension of the integration rule
-    virtual int Dimension() override{
+    virtual int Dimension() const override{
         return 2;
     }
     
@@ -37,7 +37,7 @@ class IntRuleTriangle : public IntRule
     }
 
     // Return the maximum polynomial order that can be integrated exactly
-    virtual int MaxOrder() override
+    virtual int MaxOrder() const override
     {
         return gMaxOrder();
     }

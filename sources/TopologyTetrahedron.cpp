@@ -10,6 +10,16 @@
 #include "TopologyTetrahedron.h"
 #include "tpanic.h"
 
+// Number of sides associated with tetrahedron elements elements
+const int TopologyTetrahedron::nSides;
+
+// Number of corner nodes associated with tetrahedron elements
+const int TopologyTetrahedron::nCorners;
+
+// Dimension of tetrahedron elements
+const int TopologyTetrahedron::Dimension;
+
+
 int TopologyTetrahedron::NSideNodes(int side)
 {
     if (side>14) {
@@ -23,7 +33,7 @@ int TopologyTetrahedron::NSideNodes(int side)
 }
 
 // local node index of a node associated with a side
-int TopologyTetrahedron::SideNodeIndex(int side, int node)
+int TopologyTetrahedron::SideNodeLocIndex(int side, int node)
 {
     int FaceNodes[4][3] = {{0,1,2},{0,1,3},{1,2,3},{0,2,3}};
     int SideNodes[6][2] = {{0,1},{1,2},{2,0},{0,3},{1,3},{2,3}};

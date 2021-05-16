@@ -48,13 +48,13 @@ public:
     }
     
     // Return the coordinates of the current node
-    VecDouble Co()
+    VecDouble Co() const
     {
         return xco;
     }
     
     // Return i-th coordinate of the current node
-    double Coord(int coo)
+    double Coord(int coo) const
     {
         return xco[coo];
     }
@@ -66,7 +66,7 @@ public:
     }
     
     // Function to print results
-    void Print(std::ostream &out);
+    void Print(std::ostream &out) const;
     
 };
 #endif /* GeoNode_h */

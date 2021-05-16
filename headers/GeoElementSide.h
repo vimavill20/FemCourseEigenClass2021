@@ -59,25 +59,25 @@ public:
     // Return neighbour element of a given side
     GeoElementSide Neighbour() const;
     
-    bool DataConsistency(GeoElementSide &candidate);
-    
     int Exists() const {return (fElement != 0 && fSide > -1);}
     
     // Fill in the data structure for the neighbouring information
     void SetNeighbour(const GeoElementSide &neighbour);
     
     // Verifiy if an element is a neighbour
-    bool IsNeighbour(const GeoElementSide &candidate);
+    bool IsNeighbour(const GeoElementSide &candidate) const;
     
     // Define elements neighbourhood
     void IsertConnectivity(GeoElementSide &connectivity);
     
     // Vector with all Neighbours
-    void AllNeighbours(std::vector<GeoElementSide> &allneigh);
+    void AllNeighbours(std::vector<GeoElementSide> &allneigh) const;
     
     // Compute all corner neighbours
     void ComputeNeighbours(std::vector<GeoElementSide> &neighbour);
     
+    // Print the element index and side
+    void Print(std::ostream &out) const;
     
 };
 #endif /* GeoElementSide_h */

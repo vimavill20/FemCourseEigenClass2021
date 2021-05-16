@@ -10,6 +10,16 @@
 #include "TopologyTriangle.h"
 #include "tpanic.h"
 
+// Number of sides associated with triangle elements elements
+const int TopologyTriangle::nSides;
+
+// Number of corner nodes associated with triangle elements
+const int TopologyTriangle::nCorners;
+
+// Dimension of triangle elements
+const int TopologyTriangle::Dimension;
+
+
 int TopologyTriangle::NSideNodes(int side)
 {
     if (side>6) {
@@ -23,7 +33,7 @@ int TopologyTriangle::NSideNodes(int side)
 }
 
 // local node index of a node associated with a side
-int TopologyTriangle::SideNodeIndex(int side, int node)
+int TopologyTriangle::SideNodeLocIndex(int side, int node)
 {
     if(side<3 && node==0)
         return side;
@@ -33,6 +43,7 @@ int TopologyTriangle::SideNodeIndex(int side, int node)
         return node;
     
     std::cout << "TopologyTriangle::SideNodeIndex inconsistent side or node" << std::endl;
+    DebugStop();
     return EXIT_FAILURE;
 }
 

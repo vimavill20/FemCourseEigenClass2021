@@ -47,10 +47,13 @@ public:
     void SetNumElements(int numelements);
     
     // Number of nodes of the mesh
-    int NumNodes();
+    int NumNodes() const;
     
     // Return the number of elements
-    int NumElements();
+    int NumElements() const;
+    
+    // Return the node associated with a index
+    const GeoNode &Node(int node) const;
     
     // Return the node associated with a index
     GeoNode &Node(int node);
@@ -62,10 +65,10 @@ public:
     void SetDimension(int dim){fDim = dim;}
     
     // Get Dimension.
-    int Dimension(){return fDim;}
+    int Dimension() const {return fDim;}
 
     // Return the elements associated with a index
-    GeoElement *Element(int elindex);
+    GeoElement *Element(int elindex) const;
     
     // Build the connectivity of the grid
     void BuildConnectivity();
@@ -80,7 +83,7 @@ public:
     CompMesh *GetReference() const {return Reference;}
     
     // Function to print results
-    void Print(std::ostream &out);
+    void Print(std::ostream &out) const;
     
 };
 #endif /* GeoMesh_h */

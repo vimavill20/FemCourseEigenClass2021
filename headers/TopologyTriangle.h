@@ -24,13 +24,13 @@ public:
     static const int nCorners = 3;
     
     // Dimension of triangle elements
-    const static int Dimension = 2;
+    static const int Dimension = 2;
     
     // Number of nodes associated with a side
     static int NSideNodes(int side);
     
     // Local node index of a node associated with a side
-    static int SideNodeIndex(int side, int node);
+    static int SideNodeLocIndex(int side, int node);
     
     // Return the enumerated element type
     static MElementType Type();

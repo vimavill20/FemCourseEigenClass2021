@@ -10,6 +10,16 @@
 #include "TopologyQuad.h"
 #include "tpanic.h"
 
+// Number of sides associated with quadrilateral elements elements
+const int TopologyQuad::nSides;
+
+// Number of corner nodes associated with quadrilateral elements
+const int TopologyQuad::nCorners;
+
+// Dimension of quadrilateral elements
+const int TopologyQuad::Dimension;
+
+
 int TopologyQuad::NSideNodes(int side)
 {
     if (side>8) {
@@ -23,7 +33,7 @@ int TopologyQuad::NSideNodes(int side)
 }
 
 // local node index of a node associated with a side
-int TopologyQuad::SideNodeIndex(int side, int node)
+int TopologyQuad::SideNodeLocIndex(int side, int node)
 {
     if(side<4 && node==0)
         return side;
@@ -33,6 +43,7 @@ int TopologyQuad::SideNodeIndex(int side, int node)
         return node;
     
     std::cout << "TopologyQuad::SideNodeIndex inconsistent side or node" << std::endl;
+    DebugStop();
     return EXIT_FAILURE;
 }
 

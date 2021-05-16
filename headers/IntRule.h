@@ -36,7 +36,7 @@ public:
     IntRule(int order);
     
     // Destructor of integration rule
-    ~IntRule();
+    virtual ~IntRule();
     
     // Operator of copy
     virtual IntRule &operator=(const IntRule &copy);
@@ -45,10 +45,10 @@ public:
     IntRule(const IntRule &copy);
     
     // Dimension of the integration rule
-    virtual int Dimension() = 0;
+    virtual int Dimension() const = 0;
     
     // Return the maximum polynomial order that can be integrated exactly
-    virtual int MaxOrder() = 0;
+    virtual int MaxOrder() const = 0;
     
     // Method to set polynomial order of the integration rule
     virtual void SetOrder(int order)
@@ -57,7 +57,7 @@ public:
     }
     
     // Method to get polynomial order of the integration rule
-    virtual int GetOrder()
+    virtual int GetOrder() const
     {
         return fOrder;
     }
@@ -69,7 +69,7 @@ public:
     virtual void Point(int p, VecDouble &co, double &weight) const;
     
     // Function for printing results
-    virtual void Print(std::ostream &out);
+    virtual void Print(std::ostream &out) const;
     
 };
 

@@ -59,8 +59,8 @@ void ShapeTetrahedron::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi
             {
                 case 2:
                 {
-                    int is1 = SideNodeIndex(is, 0);
-                    int is2 = SideNodeIndex(is, 1);
+                    int is1 = SideNodeLocIndex(is, 0);
+                    int is2 = SideNodeLocIndex(is, 1);
                     phi[is] = phi[is1]*phi[is2];
                     dphi(0,is) = dphi(0,is1)*phi[is2]+phi[is1]*dphi(0,is2);
                     dphi(1,is) = dphi(1,is1)*phi[is2]+phi[is1]*dphi(1,is2);
@@ -70,9 +70,9 @@ void ShapeTetrahedron::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi
                 case 3:
                 {
                     //int face = is-10;
-                    int is1 = SideNodeIndex(is, 0);
-                    int is2 = SideNodeIndex(is, 1);
-                    int is3 = SideNodeIndex(is, 2);
+                    int is1 = SideNodeLocIndex(is, 0);
+                    int is2 = SideNodeLocIndex(is, 1);
+                    int is3 = SideNodeLocIndex(is, 2);
                     phi[is] = phi[is1]*phi[is2]*phi[is3];
                     dphi(0,is) = dphi(0,is1)*phi[is2]*phi[is3]+phi[is1]*dphi(0,is2)*phi[is3]+phi[is1]*phi[is2]*dphi(0,is3);
                     dphi(1,is) = dphi(1,is1)*phi[is2]*phi[is3]+phi[is1]*dphi(1,is2)*phi[is3]+phi[is1]*phi[is2]*dphi(1,is3);

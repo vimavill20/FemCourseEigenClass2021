@@ -9,6 +9,16 @@
 #include "Topology1d.h"
 #include "tpanic.h"
 
+// Number of sides associated with 1D elements
+const int Topology1d::nSides;
+
+// Number of corner nodes associated with 1D elements
+const int Topology1d::nCorners;
+
+// Dimension of 1D elements
+const int Topology1d::Dimension;
+
+
 int Topology1d::NSideNodes(int side)
 {
     if (side>2) {
@@ -22,7 +32,7 @@ int Topology1d::NSideNodes(int side)
 }
 
 // local node index of a node associated with a side
-int Topology1d::SideNodeIndex(int side, int node)
+int Topology1d::SideNodeLocIndex(int side, int node)
 {
     if(side <2 && node == 0)
         return side;
