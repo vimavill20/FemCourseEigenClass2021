@@ -129,7 +129,7 @@ public:
     // Get DOF index in vector position i
     virtual int64_t GetDOFIndex(int i) const = 0;
     
-    DOF &DOF(int i) const;
+    DOF &GetDOF(int i) const;
     
     // Return the number of degree of freedom
     virtual int NDOF() const = 0;

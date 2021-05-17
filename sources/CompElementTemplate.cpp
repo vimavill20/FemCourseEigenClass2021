@@ -97,7 +97,7 @@ void CompElementTemplate<Shape>::ShapeFunctions(const VecDouble &intpoint, VecDo
     VecInt orders(nsides);
     for(int is=0; is<nsides; is++)
     {
-        int doforder = DOF(is).GetOrder();
+        int doforder = GetDOF(is).GetOrder();
         orders[is] = doforder;
     }
 
@@ -132,7 +132,7 @@ int CompElementTemplate<Shape>::NShapeFunctions() const {
     VecInt orders(nsides);
     for(int is=0; is<nsides; is++)
     {
-        orders[is] = DOF(is).GetOrder();
+        orders[is] = GetDOF(is).GetOrder();
     }
     return Shape::NShapeFunctions(orders);
     orders.resize(0);

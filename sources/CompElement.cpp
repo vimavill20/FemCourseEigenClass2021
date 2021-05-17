@@ -45,7 +45,7 @@ CompElement::~CompElement() {
 //     return new CompElement(*this);
 // }
 
-DOF &CompElement::DOF(int i) const
+DOF &CompElement::GetDOF(int i) const
 {
     return compmesh->GetDOF(GetDOFIndex(i));
 }
