@@ -126,51 +126,42 @@ int L2Projection::NSolutionVariables(const PostProcVar var) {
 }
 
 void L2Projection::PostProcessSolution(const IntPointData &data, const int var, VecDouble &Solout) const {
-  VecDouble sol = data.solution;
-  int solsize = sol.size();
-  int rows = data.dsoldx.rows();
-  int cols = data.dsoldx.cols();
-  MatrixDouble gradu(rows, cols);
-  gradu = data.dsoldx;
-//    if(data.dsoldx.rows() > 0 && data.dsoldx(0,0) != 0.)
-//    {
-//        std::cout << "L2Proj " << data.dsoldx(0,0) << std::endl;
-//    }
+    int nstate = this->NState();
+    int nshape = data.phi.size();
 
-  int nstate = this->NState();
+    VecDouble result(data.x.size());
+    MatrixDouble deriv(data.x.size(), data.x.size());
 
-  switch (var) {
-      case 0: //None
-      {
-          std::cout << " Var index not implemented " << std::endl;
-          DebugStop();
-      }
+    SolutionExact(data.x, result, deriv);
 
-      case 1: //ESol
-      {
-        //+++++++++++++++++
-        // Please implement me
-        std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-        DebugStop();
-        //+++++++++++++++++
-      }
-          break;
+    switch (this->GetBCType()) {
 
-      case 2: //EDSol
-      {
-        //+++++++++++++++++
-        // Please implement me
-        std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-        DebugStop();
-        //+++++++++++++++++
+        case 0:
+        {
+            for (int iv = 0; iv < nstate; iv++) {
+                for (int in = 0; in < nshape; in++) {
+                    EF(nstate * in + iv, 0) += MathStatement::gBigNumber * result[iv] * data.phi[in] * weight;
+                    for (int jn = 0; jn < nshape; jn++) {
+                        EK(nstate * in + iv, nstate * jn + iv) += MathStatement::gBigNumber * data.phi[in] * data.phi[jn] * weight;
+                    }
+                }
+            }
+            break;
+        }
 
-      }
-          break;
+        case 1:
+        {
+            for (int iv = 0; iv < nstate; iv++) {
+                for (int in = 0; in < nshape; in++) {
+                    EF(nstate * in + iv, 0) += Val2()(iv, 0) * data.phi[in] * weight;
+                }
+            }
+            break;
+        }
 
-      default:
-      {
-          std::cout << " Var index not implemented " << std::endl;
-          DebugStop();
-      }
-  }
+        default:
+        {
+            std::cout << __PRETTY_FUNCTION__ << " at line " << __LINE__ << " not implemented\n";
+        }
+    }
 }

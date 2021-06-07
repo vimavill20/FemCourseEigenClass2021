@@ -183,49 +183,57 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
 
         case 2: //EDSol
         {
-            //+++++++++++++++++
-            // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
-            //+++++++++++++++++
+            Solout.resize(rows * cols);
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    Solout[i * cols + j] = gradu(i, j);
+                }
+            }
         }
             break;
         case 3: //EFlux
         {
             //+++++++++++++++++
             // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
+            // DebugStop();
 
         }
             break;
 
         case 4: //EForce
         {
-            //+++++++++++++++++
-            // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
-            //+++++++++++++++++
+            Solout.resize(nstate);
+            VecDouble result(nstate);
+            this->forceFunction(data.x, result);
+            for (int i = 0; i < nstate; i++) {
+                Solout[i] = result[i];
+            }
         }
             break;
 
         case 5: //ESolExact
         {
-            //+++++++++++++++++
-            // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
-            //+++++++++++++++++
+            Solout.resize(nstate);
+            VecDouble sol(nstate);
+            MatrixDouble dsol(nstate, nstate);
+            this->SolutionExact(data.x, sol, dsol);
+            for (int i = 0; i < nstate; i++) {
+                Solout[i] = sol[i];
+            }
         }
             break;
         case 6: //EDSolExact
         {
-            //+++++++++++++++++
-            // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
-            //+++++++++++++++++
+            Solout.resize(rows * cols);
+            VecDouble sol(nstate);
+            MatrixDouble dsol(nstate, nstate);
+            this->SolutionExact(data.x, sol, dsol);
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    Solout[i * cols + j] = dsol(i, j);
+                }
+            }
         }
             break;
 
