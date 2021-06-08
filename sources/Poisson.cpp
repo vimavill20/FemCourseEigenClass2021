@@ -159,10 +159,6 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
     int cols = data.dsoldx.cols();
     MatrixDouble gradu(rows, cols);
     gradu = data.dsoldx;
-//    if(data.dsoldx(0,0) != 0.)
-//    {
-//        std::cout << "dsoldx " << data.dsoldx(0,0) << " " << data.dsoldx(1,0) << std::endl;
-//    }
     int nstate = this->NState();
 
     switch (var) {
@@ -174,29 +170,30 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
 
         case 1: //ESol
         {
-            Solout.resize(nstate);
-            for (int i = 0; i < nstate; i++) {
-                Solout[i] = sol[i];
-            }
+            //+++++++++++++++++
+            // Please implement me
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
 
         case 2: //EDSol
         {
-            Solout.resize(rows * cols);
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    Solout[i * cols + j] = gradu(i, j);
-                }
-            }
+            //+++++++++++++++++
+            // Please implement me
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
         case 3: //EFlux
         {
             //+++++++++++++++++
             // Please implement me
-            // DebugStop();
-
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
 
@@ -213,27 +210,20 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
 
         case 5: //ESolExact
         {
-            Solout.resize(nstate);
-            VecDouble sol(nstate);
-            MatrixDouble dsol(nstate, nstate);
-            this->SolutionExact(data.x, sol, dsol);
-            for (int i = 0; i < nstate; i++) {
-                Solout[i] = sol[i];
-            }
+            //+++++++++++++++++
+            // Please implement me
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
         case 6: //EDSolExact
         {
-            Solout.resize(rows * cols);
-            VecDouble sol(nstate);
-            MatrixDouble dsol(nstate, nstate);
-            this->SolutionExact(data.x, sol, dsol);
-
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    Solout[i * cols + j] = dsol(i, j);
-                }
-            }
+            //+++++++++++++++++
+            // Please implement me
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
 

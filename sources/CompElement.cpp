@@ -109,10 +109,7 @@ void CompElement::InitializeIntPointData(IntPointData &data) const {
 }
 
 void CompElement::ComputeRequiredData(IntPointData &data, VecDouble &intpoint) const {
-    //+++++++++++++++++
-    // Please implement me
-        std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-    DebugStop();
+    
     data.ksi = intpoint;
 
     int dim = this->Dimension();
@@ -128,10 +125,8 @@ void CompElement::ComputeRequiredData(IntPointData &data, VecDouble &intpoint) c
 
     geoel->Jacobian(data.gradx, jac, data.axes, data.detjac, jacinv);
 
-
     this->ShapeFunctions(intpoint, data.phi, data.dphidksi);
     this->Convert2Axes(data.dphidksi, jacinv, data.dphidx);
-    //+++++++++++++++++
 }
 
 void CompElement::Convert2Axes(const MatrixDouble &dphi, const MatrixDouble &jacinv, MatrixDouble &dphidx) const {
@@ -241,9 +236,17 @@ void CompElement::EvaluateError(std::function<void(const VecDouble &loc, VecDoub
 }
 
 void CompElement::Solution(VecDouble &intpoint, int var, VecDouble &sol) const {
-    //+++++++++++++++++
-    // Please implement me
-    std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-    DebugStop();
-    //+++++++++++++++++
+    MathStatement * material = this->GetStatement();
+    if (!material) {
+        std::cout << "No material for this element\n";
+        return;
+    }
+
+    IntPointData data;
+    this->InitializeIntPointData(data);
+    this->ComputeRequiredData(data, intpoint);
+    this->GetMultiplyingCoeficients(data.coefs);
+    data.ComputeSolution();
+    
+    material->PostProcessSolution(data, var, sol);
 }

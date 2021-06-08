@@ -143,21 +143,21 @@ void L2Projection::PostProcessSolution(const IntPointData &data, const int var, 
         }
         case 1: //ESol
         {
-            Solout.resize(nstate);
-            for (int i = 0; i < nstate; i++) {
-                Solout[i] = sol[i];
-            }
+            //+++++++++++++++++
+            // Please implement me
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
 
         case 2: //EDSol
         {
-            Solout.resize(rows * cols);
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
-                    Solout[i * cols + j] = gradu(i, j);
-                }
-            }
+            //+++++++++++++++++
+            // Please implement me
+            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+            DebugStop();
+            //+++++++++++++++++
         }
             break;
         default:
