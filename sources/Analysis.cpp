@@ -7,9 +7,6 @@
 #include "Assemble.h"
 #include "CompMesh.h"
 #include "CompElement.h"
-#include "GeoMesh.h"
-#include "PostProcess.h"
-#include "tpanic.h"
 #include "VTKGeoMesh.h"
 #include "PostProcessTemplate.h"
 
