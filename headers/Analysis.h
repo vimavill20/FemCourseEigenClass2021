@@ -42,7 +42,7 @@ protected:
     MatrixDouble Solution;
 
     /// as the name says : the global system of equations
-    MatrixDouble GlobalSystem;
+    SparseMat GlobalSystem;
 
     /// as the name says: the matrix representing the right hand side
     MatrixDouble RightHandSide;
