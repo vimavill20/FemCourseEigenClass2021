@@ -14,9 +14,11 @@ IntRuleTriangle::IntRuleTriangle(){
 }
 
 IntRuleTriangle::IntRuleTriangle(int order) {
+    std::cout << __PRETTY_FUNCTION__ << " needs to be implemented\n";
     DebugStop();
 }
 
 void IntRuleTriangle::SetOrder(int order) {
+    std::cout << __PRETTY_FUNCTION__ << " needs to be implemented\n";
     DebugStop();
 }
