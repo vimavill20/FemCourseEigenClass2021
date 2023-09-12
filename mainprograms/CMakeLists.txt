@@ -1,8 +1,11 @@
 add_executable(TestEigen mainEigenTest.cpp ${SOURCES} ${HEADERS})
 target_link_libraries (TestEigen Eigen3::Eigen)
 
-add_executable(Fem2021 main2021.cpp ${SOURCES})
+add_executable(Fem2021 main2021.cpp ${SOURCES} ${HEADERS})
 target_link_libraries (Fem2021 Eigen3::Eigen)
+
+add_executable(Integration mainintegration.cpp ${SOURCES} ${HEADERS})
+target_link_libraries (Integration Eigen3::Eigen)
 
 add_executable(TestIntegrate TestIntegrate.cpp ${SOURCES} ${HEADERS})
 target_link_libraries (TestIntegrate PRIVATE Eigen3::Eigen Catch2::Catch2)
