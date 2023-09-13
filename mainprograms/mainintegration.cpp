@@ -44,6 +44,5 @@ void Integrate1D (){
         double val = func(co[0]);
         integral += val*weight;
     }
-    std::cout << "espera se 2/3 obtem se " << integral << std::endl;
-    return 0;
+    std::cout << "espera se 2/3 obtem se " << integral << std::endl;    
 }
