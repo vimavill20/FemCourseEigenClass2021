@@ -43,6 +43,7 @@ void Integrate1D (){
         oned.Point(ip, co, weight);
         double val = func(co[0]);
         integral += val*weight;
+        double valoresperado=2/3;
     }
-    std::cout << "espera se 2/3 obtem se " << integral << std::endl;    
+    std::cout << "espera se "<< 2./3 <<" obtem se " << integral << std::endl;    
 }

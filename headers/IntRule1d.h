@@ -54,6 +54,7 @@ public:
     // Integration rule 1D method obtained from Numerical Recipes
     static void gauleg(const double x1, const double x2, VecDouble &x, VecDouble &w);
     
+    static int TestStatic(int order);
 };
 
 

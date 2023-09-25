@@ -38,9 +38,11 @@ protected:
     
     // Weight of the integration point
     VecDouble fWeights;
+  
 
 public:
-  
+    
+ 
     // Default Constructor of integration rule
     IntRule();
     

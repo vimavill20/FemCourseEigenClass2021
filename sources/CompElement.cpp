@@ -8,6 +8,8 @@
 #include "GeoElement.h"
 #include "MathStatement.h"
 #include "CompMesh.h"
+
+#include "IntRule1d.h"
 ///\cond
 #include <math.h> 
 ///\endcond
@@ -173,17 +175,42 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     MathStatement *material = this->GetStatement();
     if (!material) {
         std::cout << "Error at CompElement::CalcStiff" << std::endl;
+        DebugStop();
         return;
     }
+    
+    //
+    
+    //
+    
     // Second, you should clear the matrices you're going to compute
     ek.setZero();
     ef.setZero();
-
+    auto intRule = GetIntRule();
+    
+    int nintPoints = intRule->NPoints();
+    for(int ip=0; ip<nintPoints;ip++){
+      
+        VecDouble co(Dimension());
+        double weight;
+        intRule->Point(ip, co, weight);
+        int coval = co[0];
+        std::cout<<"ip: "<<ip<<" co "<< co[0] <<" weight: "<<weight<<std::endl;
+        
+        IntPointData integrationpointdata;
+        InitializeIntPointData(integrationpointdata);
+        ComputeRequiredData(integrationpointdata, co);
+        
+        material->Contribute(integrationpointdata, weight, ek, ef);
+        
+    }
+   
+    
+    
+    
     //+++++++++++++++++
     // Please implement me
-    std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-    DebugStop();
-    //+++++++++++++++++
+    
 }
 
 void CompElement::EvaluateError(std::function<void(const VecDouble &loc, VecDouble &val, MatrixDouble &deriv) > fp, VecDouble &errors) const {
