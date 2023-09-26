@@ -8,6 +8,7 @@
 #include "GeoElementTemplate.h"
 #include "GeoMesh.h"
 #include "Poisson.h"
+#include "Analysis.h"
 
 using namespace std;
 
@@ -61,7 +62,11 @@ void CallStiffFunc(){
     Poisson poi(materialid, perm);
     cmesh.SetMathStatement(materialid, &poi);
     CompElementTemplate<Shape1d> cel(index,&cmesh,&geo);
-    
+    int dimension = cel.Dimension();
+    Analysis analystest(&cmesh);
+    analystest.RunSimulation();
+
+    //Aqui test commit
     MatrixDouble ek(2,2),ef(2,1);
     IntRule1d intrule(ordenP);
     cel.SetIntRule(&intrule);

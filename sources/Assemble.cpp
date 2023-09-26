@@ -56,8 +56,8 @@ void Assemble::Compute(SparseMat &globmat, MatrixDouble &rhs) {
     
     int64_t nelem = cmesh->GetGeoMesh()->NumElements();
     for (int el = 0; el < nelem; el++) {
-        CompElement *cel = cmesh->GetElement(el);
-
+        CompElement *cel = cmesh->GetElement(0);
+        int dimension = cel->Dimension();
         int nshape = cel->NShapeFunctions();
         int nstate = cel->GetStatement()->NState();
         MatrixDouble ek(nstate * nshape, nstate * nshape);
@@ -66,6 +66,11 @@ void Assemble::Compute(SparseMat &globmat, MatrixDouble &rhs) {
         ef.setZero();
 
         cel->CalcStiff(ek, ef);
+        // Calcular los indices en la matriz global
+        
+        
+        // Colocar la contribucion en la matriz y vector global
+        
         
         //+++++++++++++++++
         std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
