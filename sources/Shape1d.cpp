@@ -12,6 +12,10 @@
 
 void Shape1d::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, MatrixDouble &dphi){
     
+  //  for (int iside=0; iside< orders.size(); iside++) {
+  //      std::cout<<"iside: "<<iside<<" order: "<<orders[iside]<<std::endl;
+  //  }
+    
     if (orders[0] < 0 || orders[1] < 0 || orders[2] < 0) {
         std::cout << "Shape1d::Shape: Invalid dimension for arguments: order\n";
         DebugStop();
@@ -28,9 +32,17 @@ void Shape1d::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, MatrixD
     auto nshape = NShapeFunctions(orders);
     phi.resize(nshape);
     dphi.resize(1,nshape);
+    
+    phi[0] =( 1.0 + xi[0])/2;
+    phi[1] = (1.0 - xi[0])/2;
+    
+    dphi(0,0) = +1.0/2.0;
+    dphi(0,1) = -1.0/2.0;
+    
+   
         
-    std::cout << "Please implement me\n";
-    DebugStop();
+  //  std::cout << "Please implement me\n";
+  //  DebugStop();
 }
 
 /// returns the number of shape functions associated with a side

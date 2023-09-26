@@ -145,9 +145,10 @@ void CompElement::Convert2Axes(const MatrixDouble &dphi, const MatrixDouble &jac
             break;
         case 1:
         {
+          //  std::cout<<"jacinv: "<<jacinv(0, 0)<<std::endl;
             for (ieq = 0; ieq < nshape; ieq++) {
                 dphidx(0, ieq) = dphi(0,ieq)*jacinv(0, 0);
-            }
+                }
         }
             break;
         case 2:
@@ -195,7 +196,7 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
         double weight;
         intRule->Point(ip, co, weight);
         int coval = co[0];
-        std::cout<<"ip: "<<ip<<" co "<< co[0] <<" weight: "<<weight<<std::endl;
+      //  std::cout<<"ip: "<<ip<<" co "<< co[0] <<" weight: "<<weight<<std::endl;
         
         IntPointData integrationpointdata;
         InitializeIntPointData(integrationpointdata);

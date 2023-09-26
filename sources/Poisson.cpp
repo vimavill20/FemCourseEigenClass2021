@@ -121,21 +121,22 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
     MatrixDouble perm(3, 3);
     perm = this->GetPermeability();
     
-    double valPerm =0.0;
+    double perm_valX= perm(0,0);
     
+    double valPerm =0.0;
     int nphis = phi.size();
     for(int iphi=0; iphi<nphis; iphi++){
+      //  std::cout<<"phival "<<dphi(0,iphi)<<std::endl;
         for(int jphi=0; jphi<nphis; jphi++){
-            EK(iphi,jphi) += weight*phi[iphi]*phi[jphi];
-            std::cout << EK << std::endl;
+            EK(iphi,jphi) += weight*perm_valX*dphi(0,iphi)*dphi(0,jphi)*data.detjac;
+            
         }
-        
     }
-
+   // std::cout << EK << std::endl;
     dphi2 = data.axes.transpose()*data.dphidx;
     dphi3 = dphi2.transpose();
 
-    return EK;
+    
     double res = 0.;
 
     auto force = this->GetForceFunction();
@@ -146,10 +147,7 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
         res = resloc[0];
     }
 
-    //+++++++++++++++++
-    // Please implement me
-    std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-    DebugStop();
+ 
     //+++++++++++++++++
 }
 
