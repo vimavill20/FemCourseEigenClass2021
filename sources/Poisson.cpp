@@ -140,13 +140,17 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
     double res = 0.;
 
     auto force = this->GetForceFunction();
+    
     if(force)
     {
         VecDouble resloc(1);
         force(data.x, resloc);
         res = resloc[0];
     }
-
+    for(int iphi=0; iphi<nphis; iphi++){
+        //  std::cout<<"phival "<<dphi(0,iphi)<<std::endl;
+        EF(iphi,0) += res*weight*phi(iphi,0)*data.detjac;
+    }
  
     //+++++++++++++++++
 }

@@ -19,7 +19,9 @@ int main() {
     CallStiffFunc();
     return 0;
 }
-
+void Fvictor (const VecDouble &co, VecDouble &result){
+    result[0]=co[0];
+};
 void CallStiffFunc(){
     
     int ordenP=1;
@@ -31,7 +33,7 @@ void CallStiffFunc(){
     GeoNode gnod0, gnod1, gnod2;
     VecDouble co0(3), co1(3), co2(3);
     co0[0]=0.0;
-    co1[0]=16.0;
+    co1[0]=1.0;
 //    co2[0]=6.0;
    // co0 << 0.;
    // co1 << 4.;
@@ -60,18 +62,32 @@ void CallStiffFunc(){
     perm.setIdentity();
     perm(0,0) = 1.;
     Poisson poi(materialid, perm);
+    poi.SetForceFunction(Fvictor);
     cmesh.SetMathStatement(materialid, &poi);
     CompElementTemplate<Shape1d> cel(index,&cmesh,&geo);
     int dimension = cel.Dimension();
-    Analysis analystest(&cmesh);
-    analystest.RunSimulation();
+    
 
     //Aqui test commit
     MatrixDouble ek(2,2),ef(2,1);
     IntRule1d intrule(ordenP);
     cel.SetIntRule(&intrule);
     cel.CalcStiff(ek, ef);
+    
+    // Create Analysis
+    
+  
+    //Configure Analysis
+    
+    //Assemble Analysis
+    
+    //Solve Analysis
+    
+    //Postprocess
+    
     std::cout<<"********************Element Matrix********************"<<std::endl;
     cout << ek << endl;
-    
+    cout << ef << endl;
+    //Analysis analystest(&cmesh);
+    //analystest.RunSimulation();
 }
