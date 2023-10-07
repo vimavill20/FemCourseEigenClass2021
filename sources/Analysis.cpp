@@ -78,7 +78,7 @@ void Analysis::RunSimulation() {
     solver.factorize(K); 
     //Use the factors to solve the linear system 
     Solution = solver.solve(F); 
-
+    std::cout << Solution << std::endl;
     std::cout << "Solution computed!" << std::endl;
     
     int solsize = Solution.rows();
@@ -106,15 +106,15 @@ VecDouble Analysis::PostProcessError(std::ostream &out, PostProcess &defPostProc
     int64_t nel = cmesh->GetElementVec().size();
     GeoMesh *gmesh = cmesh->GetGeoMesh();
     int dim = gmesh->Dimension();
-
+    fExact=defPostProc.GetExact();
     for (int64_t i = 0; i < nel; i++) {
-        CompElement *el = cmesh->GetElement(i);
-	GeoElement *gel = el->GetGeoElement();
+        CompElement* el = cmesh->GetElement(i);
+	    GeoElement* gel = el->GetGeoElement();
 	if(gel->Dimension() != dim) continue;
         if (el) {
             if (el->GetStatement()->GetMatID() == 1) {
                 errors.setZero();
-                fExact = defPostProc.GetExact();
+            
                 el->EvaluateError(fExact, errors);
                 int nerrors = errors.size();
                 if(values.size() != nerrors)

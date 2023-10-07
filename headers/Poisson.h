@@ -25,9 +25,10 @@ class Poisson : public MathStatement
     // Force funtion related to Poisson math statement
     std::function<void(const VecDouble &co, VecDouble &result)> forceFunction;
     
-    std::function<void(const VecDouble &loc, VecDouble &result, MatrixDouble &deriv)> SolutionExact;
+    
     
 public:
+    std::function<void(const VecDouble &loc, VecDouble &result, MatrixDouble &deriv)> SolutionExact;
     
     enum PostProcVar {ENone, ESol, EDSol, EFlux, EForce, ESolExact, EDSolExact};
     
@@ -36,7 +37,6 @@ public:
     
     // Constructor of Poisson
     Poisson(int materialid, MatrixDouble &perm);
-    
     // Copy constructor of Poisson
     Poisson(const Poisson &copy);
     

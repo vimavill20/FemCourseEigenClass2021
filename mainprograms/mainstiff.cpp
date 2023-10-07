@@ -34,26 +34,29 @@ void CallStiffFunc(){
     VecDouble co0(3), co1(3), co2(3);
     co0[0]=0.0;
     co1[0]=1.0;
+    co2[0]=2.0;
 //    co2[0]=6.0;
    // co0 << 0.;
    // co1 << 4.;
     gnod0.SetCo(co0);
     gnod1.SetCo(co1);
+    gnod2.SetCo(co2);
 //    gnod1.SetCo(co2);
     
     
     gmesh.Node(0) = gnod0;
     gmesh.Node(1) = gnod1;
-  //  gmesh.Node(2) = gnod2;
+    gmesh.Node(2) = gnod2;
     
     int materialid = 0;
     VecInt nodeindices(2);
-    nodeindices[0]=0;
-    nodeindices[1]=1;
-    
-    int index = 0;
+    nodeindices <<0,1;
+  
+    int index=0 ;
 //  const VecInt &nodeindices, int materialid, GeoMesh *gmesh, int index
     GeoElementTemplate<Geom1d> geo(nodeindices,materialid,&gmesh,index);
+    nodeindices<<1,2;
+    GeoElementTemplate<Geom1d> geo2(nodeindices,materialid,&gmesh,index);
         
     CompMesh cmesh(&gmesh);
     cmesh.SetDefaultOrder(ordenP);
@@ -61,15 +64,18 @@ void CallStiffFunc(){
     MatrixDouble perm(3,3);
     perm.setIdentity();
     perm(0,0) = 1.;
+    //Criando math statement de clase poisson e adiciounando na malha
     Poisson poi(materialid, perm);
     poi.SetForceFunction(Fvictor);
+    //Criando elemento computacional basado em elemento geometrico, se adicionando na malha computacional
+    //Calculando a matriz de T
     cmesh.SetMathStatement(materialid, &poi);
     CompElementTemplate<Shape1d> cel(index,&cmesh,&geo);
     int dimension = cel.Dimension();
     
-
+    int nel=gmesh.NumElements();
     //Aqui test commit
-    MatrixDouble ek(2,2),ef(2,1);
+    MatrixDouble ek(nel+1,nel+1),ef(nel+1,1);
     IntRule1d intrule(ordenP);
     cel.SetIntRule(&intrule);
     cel.CalcStiff(ek, ef);
@@ -87,6 +93,7 @@ void CallStiffFunc(){
     
     std::cout<<"********************Element Matrix********************"<<std::endl;
     cout << ek << endl;
+    std::cout<<"********************Force Vector********************"<<std::endl;
     cout << ef << endl;
     //Analysis analystest(&cmesh);
     //analystest.RunSimulation();

@@ -79,22 +79,20 @@ void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &E
         SolutionExact(data.x, result, deriv);
     }
 
-    //+++++++++++++++++
-    // Please implement me
-    std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-    DebugStop();
-
     switch (this->GetBCType()) {
-
+//Dirichlet0 Neumann1 Mixed2
         case 0:
         {
             // Your code here
+            EF+= -1.0*weight*data.phi*result[0]*gBigNumber;
+            EK+= -1.0*gBigNumber*weight*data.phi*data.phi.transpose();
             break;
         }
 
         case 1:
         {
             // Your code here
+            
             break;
         }
 

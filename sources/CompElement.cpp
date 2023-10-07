@@ -176,10 +176,13 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     MathStatement *material = this->GetStatement();
     if (!material) {
         std::cout << "Error at CompElement::CalcStiff" << std::endl;
-        DebugStop();
+        
         return;
     }
-    
+    int nshape = NShapeFunctions();
+    int nstate = material->NState();
+    ek.resize(nstate * nshape, nstate * nshape);
+    ef.resize(nstate * nshape, 1);
     //
     
     //
@@ -187,30 +190,25 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     // Second, you should clear the matrices you're going to compute
     ek.setZero();
     ef.setZero();
-    auto intRule = GetIntRule();
-    
-    int nintPoints = intRule->NPoints();
-    for(int ip=0; ip<nintPoints;ip++){
-      
-        VecDouble co(Dimension());
-        double weight;
-        intRule->Point(ip, co, weight);
-        int coval = co[0];
-      //  std::cout<<"ip: "<<ip<<" co "<< co[0] <<" weight: "<<weight<<std::endl;
-        
-        IntPointData integrationpointdata;
-        InitializeIntPointData(integrationpointdata);
-        ComputeRequiredData(integrationpointdata, co);
-        
-        material->Contribute(integrationpointdata, weight, ek, ef);
-        
+    IntRule* intrule = this->GetIntRule();
+    int maxIntOrder = 5;
+    intrule->SetOrder(maxIntOrder);
+
+    IntPointData data;
+    this->InitializeIntPointData(data);
+    int nintpoints = intrule->NPoints();
+
+    double weight = 0.;
+
+    for (int nint = 0; nint < nintpoints; nint++) {
+        intrule->Point(nint, data.ksi, weight);
+        this->ComputeRequiredData(data, data.ksi);
+        weight *= fabs(data.detjac);
+        material->Contribute(data, weight, ek, ef);
     }
    
     
-    
-    
-    //+++++++++++++++++
-    // Please implement me
+
     
 }
 

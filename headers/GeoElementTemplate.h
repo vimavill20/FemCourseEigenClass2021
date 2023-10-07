@@ -45,7 +45,7 @@ public:
         return result;
     }
 
-    // return the dimension of the element
+    // return the dimension of he element
     virtual int Dimension() const
     {
         return TGeom::Dimension;
