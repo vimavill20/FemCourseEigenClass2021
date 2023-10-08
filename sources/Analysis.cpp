@@ -68,7 +68,11 @@ void Analysis::RunSimulation() {
 
     GlobalSystem = K;
     RightHandSide = F;
-
+    
+    std::cout<<"Ek="<<std::endl;
+    std::cout<<GlobalSystem<<std::endl;
+    std::cout<<"Ef="<<std::endl;
+    std::cout<<RightHandSide<<std::endl;
     std::cout << "Computing solution..." << std::endl;
     
     SparseLU<SparseMat, COLAMDOrdering<int> >   solver;
@@ -83,11 +87,28 @@ void Analysis::RunSimulation() {
     
     int solsize = Solution.rows();
     VecDouble sol(solsize);
+   
     
+ 
+    int nalphas = Solution.size();
+    double solSecond= Solution(1,0);
+    double solLast= Solution(nalphas-1,0);
+    std::cout<<Solution<<std::endl;
     for (int i = 0; i < solsize; i++) {
-        sol[i] = Solution(i, 0);
+        if(i>=1 && i< solsize-1){
+            sol[i] = Solution(i+1, 0);
+        }
+        
     }
+    sol[0] = sol[1];
+    sol[solsize-1] = solSecond;
+    std::cout << "Solution computed2!" << std::endl;
+    std::cout << sol << std::endl;
+    std::cout << "Solution computed2!" << std::endl;
+    
     cmesh->LoadSolution(sol);
+    
+       
 }
 
 void Analysis::PostProcessSolution(const std::string &filename, PostProcess &defPostProc) const {
