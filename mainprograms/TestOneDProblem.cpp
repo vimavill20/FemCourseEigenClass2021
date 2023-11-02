@@ -59,7 +59,7 @@ int main ()
     perm(2,2) = 1.;
     Poisson *mat1 = new Poisson(1/*materialid*/,perm);
     mat1->SetDimension(1);
-    //Funcao conhecida da nossa equacao diferencial que ira para o vetor de carga funcao lambda/
+    //Funcao conhecida da nossa equacao diferencial que ira para o vetor de carga/
     auto force = [](const VecDouble &x, VecDouble &res)
     {
         res[0] = 1.;
@@ -87,8 +87,6 @@ int main ()
     PostProcessTemplate<Poisson> postprocess;
     postprocess.SetExact(exact);
     mat1->SetExactSolution(exact);
-  
-
     if(!mat1->SolutionExact){
         DebugStop();
     }
@@ -100,8 +98,6 @@ int main ()
     AnalysisLoc.PostProcessSolution(filenameSol, postprocess);
     VecDouble errvec;
     errvec = AnalysisLoc.PostProcessError(std::cout, postprocess);
-    
-   // gmesh.Print(std::cout);
     
     
     return 0;

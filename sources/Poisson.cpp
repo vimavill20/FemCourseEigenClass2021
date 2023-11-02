@@ -145,7 +145,6 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
         VecDouble resloc(1);
         force(data.x, resloc);
         res = resloc[0];
-        int ok=0;
     }
     for(int iphi=0; iphi<nphis; iphi++){
         //  std::cout<<"phival "<<dphi(0,iphi)<<std::endl;
