@@ -6,8 +6,8 @@
 
 #include "IntRule.h"
 ///\cond
-#include <iostream> 
-#include <vector> 
+#include <iostream>
+#include <vector>
 #include <cmath>
 #include <iomanip>
 ///\endcond
@@ -63,7 +63,7 @@ void IntRule::Print(std::ostream &out) const {
 
 void IntRule::Point(int p, VecDouble& co, double& w) const {
     int dim = co.size();
-    
+
     for (int i = 0; i < dim; i++) {
         co[i] = fPoints(p, i);
     }

@@ -33,11 +33,11 @@ void Shape1d::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, MatrixD
     phi.resize(nshape);
     dphi.resize(1,nshape);
     
-    phi[0] =( 1.0 + xi[0])/2;
-    phi[1] = (1.0 - xi[0])/2;
+    phi[0] =( 1.0 - xi[0])/2;
+    phi[1] = (1.0 + xi[0])/2;
     
-    dphi(0,0) = +1.0/2.0;
-    dphi(0,1) = -1.0/2.0;
+    dphi(0,0) = -1.0/2.0;
+    dphi(0,1) = +1.0/2.0;
     
    
         

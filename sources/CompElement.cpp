@@ -182,7 +182,7 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     int nshape = NShapeFunctions();
     int nstate = material->NState();
     ek.resize(nstate * nshape, nstate * nshape);
-    ef.resize(nstate * nshape, 1);
+        ef.resize(nstate * nshape, 1);
     //
     
     //

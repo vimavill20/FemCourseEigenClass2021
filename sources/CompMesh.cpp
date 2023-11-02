@@ -169,23 +169,7 @@ VecDouble &CompMesh::Solution() {
 void CompMesh::LoadSolution(VecDouble &Sol) {
     solution = Sol;
     
-  /*  for(int iel =0; iel< this->compelements.size(); iel++){
-        CompElement *cel = this->GetElement(iel);
-        // Tomar la dimension de la malla
-        if (cel->Dimension()== 1) {
-            int ndofs = cel->NDOF();
-            for (int idof=0; idof<ndofs; idof++) {
-                DOF tdof = cel->GetDOF(idof);
-                int firstEq = tdof.firstequation;
-            }
-            int indexDof = cel->GetDOFIndex(<#int i#>)
-        }
-    }*/
-  //  DebugStop();
-//    solution.resize(Sol.size());
-//    for (int64_t i = 0; i < Sol.size(); i++) {
-//        solution[i] = Sol[i];
-//    }
+  
 }
 
 void CompMesh::Print(std::ostream & out) {
