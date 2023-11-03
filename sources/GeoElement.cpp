@@ -36,13 +36,15 @@ MElementType GeoElement::Type(int side) const
     if(side == nsides-1) return Type();
     int nsidenodes = NSideNodes(side);
     switch (nsidenodes) {
-        case 1:
+        case 0:
             return EPoint;
             break;
-        case 2:
+        case 1:
             return EOned;
-        case 3:
+        case 2:
             return ETriangle;
+        case 3:
+            return EQuadrilateral;
             
         default:
             DebugStop();

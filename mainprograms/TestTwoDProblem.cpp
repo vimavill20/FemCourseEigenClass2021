@@ -24,17 +24,33 @@
 #include "L2Projection.h"
 #include "Analysis.h"
 #include "PostProcessTemplate.h"
+#include "VTKGeoMesh.h"
+#include "GeoElementTemplate.h"
+#include "Geom0d.h"
+#include "Geom1d.h"
+#include "GeomQuad.h"
+#include "GeomTriangle.h"
 
 int main ()
 {
     GeoMesh gmesh;
+    
     ReadGmsh read;
-    std::string filename("/Users/victorvillegassalabarria/Documents/Github/FemCourseEigenClass2021/mainprograms/quadq3.msh");
+    std::string filename("/Users/jose/Documents/Github/FemCourseEigenClass2021/mainprograms/quadq3.msh");
 #ifdef MACOSX
     filename = "../"+filename;
 #endif
+    gmesh.SetDimension(2);
     read.Read(gmesh,filename);
-
+    const std::string filenamevtk("geomesh.vtk");
+    gmesh.SetDimension(3);
+    for(int iel=0; iel<gmesh.NumElements(); iel++){
+        GeoElement *gel = gmesh.Element(iel);
+        std::cout<<"elemento: "<<iel<< " matid: "<<gel->Material() <<" type:" <<gel->Type()<<std::endl;
+    }
+    
+    VTKGeoMesh::PrintGMeshVTK(&gmesh, filenamevtk);
+    
     CompMesh cmesh(&gmesh);
     MatrixDouble perm(3,3);
     perm.setZero();

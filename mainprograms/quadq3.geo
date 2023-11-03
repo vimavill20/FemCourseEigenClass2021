@@ -1,20 +1,29 @@
 //+
 SetFactory("OpenCASCADE");
 
-Rectangle(1) = {0, 0, 0, 1, 1, 0};
+h=1;
+Point(1) = {0,0,0,h};
+Point(2) = {0,2,0,h};
+Point(3) = {2,2,0,h};
+Point(4) = {2,0,0,h};//+
+Line(1) = {1, 4};
 //+
-Physical Point("fix", 3) = {1};
+Line(2) = {4, 3};
 //+
-Physical Curve("contorno", 2) = {4, 1, 2, 3};
+Line(3) = {3, 2};
 //+
-Physical Surface("plano", 1) = {1};
+Line(4) = {2, 1};
 //+
-//Transfinite Surface {1};
+Curve Loop(1) = {4, 1, 2, 3};
 //+
-Transfinite Curve {4, 2} = 9 Using Progression 1;
+Plane Surface(1) = {1};
 //+
-Transfinite Curve {1, 3} = 9 Using Progression 1;
-//+
-Recombine Surface {1};
-//
-Transfinite Surface {1};
+Physical Surface("mat", 1) = {1};
+Physical Curve("bc1", 2) = {1};
+Physical Curve("bc2", 3) = {2};
+Physical Curve("bc3", 4) = {3};
+Physical Curve("bc4", 5) = {4};
+
+Transfinite Curve{:}=3;
+Transfinite Surface{1};
+Recombine Surface{1};
