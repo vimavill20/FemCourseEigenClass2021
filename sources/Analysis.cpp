@@ -68,11 +68,7 @@ void Analysis::RunSimulation() {
 
     GlobalSystem = K;
     RightHandSide = F;
-<<<<<<< HEAD
     
-=======
-
->>>>>>> parent of f1bddaa (PostPorcess solution)
     std::cout << "Computing solution..." << std::endl;
     
     SparseLU<SparseMat, COLAMDOrdering<int> >   solver;
@@ -87,19 +83,14 @@ void Analysis::RunSimulation() {
     
     int solsize = Solution.rows();
     VecDouble sol(solsize);
-<<<<<<< HEAD
    
     for (int i = 0; i < solsize; i++) {
             sol[i] = Solution(i, 0);
     }
     
-    
-=======
-    
     for (int i = 0; i < solsize; i++) {
         sol[i] = Solution(i, 0);
     }
->>>>>>> parent of f1bddaa (PostPorcess solution)
     cmesh->LoadSolution(sol);
 }
 

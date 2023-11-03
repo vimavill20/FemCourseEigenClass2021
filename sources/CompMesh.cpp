@@ -168,15 +168,11 @@ VecDouble &CompMesh::Solution() {
 
 void CompMesh::LoadSolution(VecDouble &Sol) {
     solution = Sol;
-<<<<<<< HEAD
     
-  
-=======
 //    solution.resize(Sol.size());
 //    for (int64_t i = 0; i < Sol.size(); i++) {
 //        solution[i] = Sol[i];
 //    }
->>>>>>> parent of f1bddaa (PostPorcess solution)
 }
 
 void CompMesh::Print(std::ostream & out) {
