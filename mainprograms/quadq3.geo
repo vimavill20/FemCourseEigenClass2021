@@ -1,7 +1,7 @@
 //+
 SetFactory("OpenCASCADE");
 
-h=1;
+h=0;
 Point(1) = {0,0,0,h};
 Point(2) = {0,2,0,h};
 Point(3) = {2,2,0,h};
@@ -24,6 +24,6 @@ Physical Curve("bc2", 3) = {2};
 Physical Curve("bc3", 4) = {3};
 Physical Curve("bc4", 5) = {4};
 
-Transfinite Curve{:}=3;
+Transfinite Curve{:}=2;
 Transfinite Surface{1};
 Recombine Surface{1};

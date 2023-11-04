@@ -41,7 +41,7 @@ void Integrate2DQuad (){
         double val=func(co);
         integral+=val*weight;
         }
-    std::cout<<  "Espera se 4/9 obtem se"<<integral<<std::endl;
+    std::cout<<  "Espera se 4/9 obtem se "<<integral<<std::endl;
     }
 
 void Integrate1D (){

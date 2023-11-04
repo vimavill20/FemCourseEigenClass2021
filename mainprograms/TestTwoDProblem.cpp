@@ -40,15 +40,9 @@ int main ()
 #ifdef MACOSX
     filename = "../"+filename;
 #endif
-    gmesh.SetDimension(2);
+   
     read.Read(gmesh,filename);
     const std::string filenamevtk("geomesh.vtk");
-    gmesh.SetDimension(3);
-    for(int iel=0; iel<gmesh.NumElements(); iel++){
-        GeoElement *gel = gmesh.Element(iel);
-        std::cout<<"elemento: "<<iel<< " matid: "<<gel->Material() <<" type:" <<gel->Type()<<std::endl;
-    }
-    
     VTKGeoMesh::PrintGMeshVTK(&gmesh, filenamevtk);
     
     CompMesh cmesh(&gmesh);
@@ -69,9 +63,18 @@ int main ()
     proj.setZero();
     val1.setZero();
     val2.setZero();
-    L2Projection *bc_linha = new L2Projection(0,2,proj,val1,val2);
-    L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
-    std::vector<MathStatement *> mathvec = {0,mat1,bc_point,bc_linha};
+    int matIdBC1 = 2;
+    int matIdBC2 = 3;
+    int matIdBC3 = 4;
+    int matIdBC4 = 5;
+    int bcN = 0;
+    int bcD = 0;
+    L2Projection *bc_linha1 = new L2Projection(bcN,matIdBC1,proj,val1,val2);
+    L2Projection *bc_linha2 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
+    L2Projection *bc_linha3 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
+    L2Projection *bc_linha4 = new L2Projection(bcN,matIdBC3,proj,val1,val2);
+    //L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
+    std::vector<MathStatement *> mathvec = {0,mat1,bc_linha1,bc_linha2,bc_linha3,bc_linha4};
     cmesh.SetMathVec(mathvec);
     cmesh.SetDefaultOrder(1);
     cmesh.AutoBuild();

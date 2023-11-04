@@ -53,21 +53,63 @@ void GeomQuad::X(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x) {
     if (x.size() < nrow) {
         x.resize(2);
     }
-
+   // DebugStop();
     x.setZero();
+    
+    VecDouble phi(nCorners);
+    MatrixDouble dphi(Dimension, nCorners);
+    Shape(xi, phi, dphi);
+    int space = NodeCo.rows();
+    for(int i = 0; i < space; i++) {
+        x[i] = 0.0;
+        for(int j = 0; j < 4; j++) {
+            x[i] += phi(j,0)*NodeCo(i,j);
+        }
+    }
 
-        VecDouble phi(nCorners);
-        MatrixDouble dphi(Dimension, nCorners);
-
-        Shape(xi, phi, dphi);
+  
 }
-
+//template<class T>
+//inline void TPZGeoQuad::X(const TPZFMatrix<REAL> &nodes,TPZVec<T> &loc,TPZVec<T> &x){
+//
+//    TPZFNMatrix<4,T> phi(NNodes,1);
+//    TPZFNMatrix<8,T> dphi(2,NNodes);
+//    TShape(loc,phi,dphi);
+//    int space = nodes.Rows();
+//
+//    for(int i = 0; i < space; i++) {
+//        x[i] = 0.0;
+//        for(int j = 0; j < 4; j++) {
+//            x[i] += phi(j,0)*nodes.GetVal(i,j);
+//        }
+//    }
+//
+//}
 void GeomQuad::GradX(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x, MatrixDouble &gradx) {
-    std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
+  //  std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
     if(xi.size() != Dimension) DebugStop();
     if(x.size() != NodeCo.rows()) DebugStop();
     if(NodeCo.cols() != nCorners) DebugStop();
-    DebugStop();
+    
+    
+    //
+    VecDouble phi(nCorners);
+    MatrixDouble dphi(Dimension, nCorners);
+    
+    Shape(xi, phi, dphi);
+    int space = NodeCo.rows();
+    gradx.resize(4,2);
+    for(int i = 0; i < 4; i++)
+    {
+        for(int j = 0; j < space; j++)
+        {
+            gradx(j,0) += NodeCo(j,i)*dphi(0,i);
+            gradx(j,1) += NodeCo(j,i)*dphi(1,i);
+        }
+    }
+    //
+    
+
 }
 
 void GeomQuad::SetNodes(const VecInt &nodes) {
