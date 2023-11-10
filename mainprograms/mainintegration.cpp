@@ -37,7 +37,10 @@ void Integrate2DQuad (){
     VecDouble co(2);
     double weight;
     for (int ip=0; ip<np; ip++){
+        VecDouble co(2);
+        double weight;
         quadrule.Point(ip,co,weight);
+        std::cout<<"ip= "<<ip<< "co= "<<co<<"weight= "<<weight<<std::endl;
         double val=func(co);
         integral+=val*weight;
         }

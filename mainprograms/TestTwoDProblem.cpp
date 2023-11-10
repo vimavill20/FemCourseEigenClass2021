@@ -36,7 +36,8 @@ int main ()
     GeoMesh gmesh;
     
     ReadGmsh read;
-    std::string filename("/Users/jose/Documents/Github/FemCourseEigenClass2021/mainprograms/quadq3.msh");
+    std::string filename("/Users/victorvillegassalabarria/Documents/Github/FemCourseEigenClass2021/mainprograms/quadq3.msh");
+
 #ifdef MACOSX
     filename = "../"+filename;
 #endif
@@ -53,7 +54,8 @@ int main ()
     perm(2,2) = 1.;
     Poisson *mat1 = new Poisson(1,perm);
     mat1->SetDimension(2);
-
+  
+    
     auto force = [](const VecDouble &x, VecDouble &res)
     {
         res[0] = 2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];
@@ -69,26 +71,29 @@ int main ()
     int matIdBC4 = 5;
     int bcN = 0;
     int bcD = 0;
-    L2Projection *bc_linha1 = new L2Projection(bcN,matIdBC1,proj,val1,val2);
+    val1(0,0)=0;
+    val2(0,0)= 0.001;
+   
+    L2Projection *bc_linha1 = new L2Projection(bcD,matIdBC1,proj,val1,val2);
+//    bc_linha1->SetExactSolution(<#const std::function<void (const VecDouble &, VecDouble &, MatrixDouble &)> &Exact#>);
     L2Projection *bc_linha2 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
-    L2Projection *bc_linha3 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
-    L2Projection *bc_linha4 = new L2Projection(bcN,matIdBC3,proj,val1,val2);
-    //L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
+    L2Projection *bc_linha3 = new L2Projection(bcD,matIdBC2,proj,val1,val2);
+    L2Projection *bc_linha4 = new L2Projection(bcD,matIdBC3,proj,val1,val2);
+//    L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
+//    L2Projection* bc_linha = new L2Projection(0, 2, proj, val1, val2);
+//    std::vector<MathStatement *> mathvec = {0,mat1,bc_point,bc_linha};
+    
     std::vector<MathStatement *> mathvec = {0,mat1,bc_linha1,bc_linha2,bc_linha3,bc_linha4};
+    
     cmesh.SetMathVec(mathvec);
     cmesh.SetDefaultOrder(1);
     cmesh.AutoBuild();
     cmesh.Resequence();
+    cmesh.Print();
 
-        Analysis locAnalysis(&cmesh);
+    Analysis locAnalysis(&cmesh);
     locAnalysis.RunSimulation();
-    PostProcessTemplate<Poisson> postprocess;
-    auto exact = [](const VecDouble &x, VecDouble &val, MatrixDouble &deriv)
-    {
-        val[0] = (1.-x[0])*x[0]*(1-x[1])*x[1];
-        deriv(0,0) = (1.-2.*x[0])*(1-x[1])*x[1];
-        deriv(1,0) = (1-2.*x[1])*(1-x[0])*x[0];
-    };
+    
 
 //    if (!strcmp("Sol", name.c_str())) return ESol;
 //    if (!strcmp("DSol", name.c_str())) return EDSol;
@@ -96,16 +101,23 @@ int main ()
 //    if (!strcmp("Force", name.c_str())) return EForce;
 //    if (!strcmp("SolExact", name.c_str())) return ESolExact;
 //    if (!strcmp("DSolExact", name.c_str())) return EDSolExact;
-    postprocess.AppendVariable("Sol");
-    postprocess.AppendVariable("DSol");
-    postprocess.AppendVariable("Flux");
-    postprocess.AppendVariable("Force");
-    postprocess.AppendVariable("SolExact");
-    postprocess.AppendVariable("DSolExact");
+    
+    PostProcessTemplate<Poisson> postprocess;
+    auto exact = [](const VecDouble &x, VecDouble &val, MatrixDouble &deriv)
+    {
+        val[0] = (1.-x[0])*x[0]*(1-x[1])*x[1];
+        deriv(0,0) = (1.-2.*x[0])*(1-x[1])*x[1];
+        deriv(1,0) = (1-2.*x[1])*(1-x[0])*x[0];
+    };
     postprocess.SetExact(exact);
     mat1->SetExactSolution(exact);
-    locAnalysis.PostProcessSolution("quads.vtk", postprocess);
-
+    const std::string filenameSol("solutionQuad3.vtk");
+    const std::string namevar("Sol");
+    const std::string namevar2("SolExact");
+    
+    postprocess.AppendVariable(namevar);
+    postprocess.AppendVariable(namevar2);
+    locAnalysis.PostProcessSolution(filenameSol, postprocess);
     VecDouble errvec;
     errvec = locAnalysis.PostProcessError(std::cout, postprocess);
     

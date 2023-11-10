@@ -64,6 +64,7 @@ void Analysis::RunSimulation() {
     F.setZero();
 
     assemb.Compute(K, F);
+    std::cout<<F<<std::endl;
     std::cout << "Assemble done!" << std::endl;
 
     GlobalSystem = K;
