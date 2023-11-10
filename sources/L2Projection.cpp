@@ -77,7 +77,7 @@ void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &E
     result[0] = Val2()(0,0);
     MatrixDouble deriv(data.x.size(), nstate);
     deriv.setZero();
-    
+    int in, jn, iv;
     if(SolutionExact)
     {
         SolutionExact(data.x, result, deriv);
@@ -88,10 +88,10 @@ void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &E
         case 0:
         {
             // Your code here
-            for(auto iv=0; iv<nstate; iv++){
-                for(auto in=0; in<phr;in++){
+            for( iv=0; iv<nstate; iv++){
+                for( in=0; in<phr;in++){
                     EF(nstate*in+iv,0)+=weight*phi(in,0)*result[0]*gBigNumber;
-                    for(auto jn=0; jn<phr;jn++){
+                    for( jn=0; jn<phr;jn++){
                         EK(nstate*in+iv,nstate*jn+iv)+= gBigNumber*weight*phi(in,0)*phi(jn,0);
             }
         }
@@ -104,7 +104,7 @@ void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &E
         {
         for(auto iv = 0; iv < nstate; iv++){
             for(auto in = 0 ; in < phr; in++) {
-                        EF(nstate*in+iv,0) += Val2()(iv,0) *gBigNumber  *phi(in,0) * weight;
+                        EF(nstate*in+iv,0) += Val2()(iv,0)*phi(in,0) * weight;
             }//in
         }//iv
              // Your code here

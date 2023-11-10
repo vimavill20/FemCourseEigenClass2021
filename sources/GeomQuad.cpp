@@ -63,7 +63,12 @@ void GeomQuad::X(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x) {
     for(int i = 0; i < space; i++) {
         x[i] = 0.0;
         for(int j = 0; j < 4; j++) {
-            x[i] += phi(j,0)*NodeCo(i,j);
+            x[i] += phi[j]*NodeCo(i,j);
+            std::cout<<"iteración i: "<<i<<" iteración j: "<<j<<std::endl;
+            std::cout<<"Phi: "<<phi[j]<<std::endl;
+            std::cout<<"Coordenada: "<<NodeCo(i,j)<<std::endl;
+            std::cout<<"Map:"<<x[i]<<std::endl;
+            
         }
     }
 

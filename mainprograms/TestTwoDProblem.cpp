@@ -74,7 +74,7 @@ int main ()
     val1(0,0)=0;
     val2(0,0)= 0.001;
    
-    L2Projection *bc_linha1 = new L2Projection(bcD,matIdBC1,proj,val1,val2);
+    L2Projection *bc_linha1 = new L2Projection(bcN,matIdBC1,proj,val1,val2);
 //    bc_linha1->SetExactSolution(<#const std::function<void (const VecDouble &, VecDouble &, MatrixDouble &)> &Exact#>);
     L2Projection *bc_linha2 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
     L2Projection *bc_linha3 = new L2Projection(bcD,matIdBC2,proj,val1,val2);
