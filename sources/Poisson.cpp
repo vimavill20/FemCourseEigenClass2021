@@ -126,9 +126,12 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
     double valPerm =0.0;
     int nphis = phi.size();
     for(int iphi=0; iphi<nphis; iphi++){
-      //  std::cout<<"phival "<<dphi(0,iphi)<<std::endl;
         for(int jphi=0; jphi<nphis; jphi++){
-            EK(iphi,jphi) += weight*perm_valX*dphi(0,iphi)*dphi(0,jphi)*data.detjac;
+            double dphi_i_Timesdphi_j =0.0;
+            for (int idim=0; idim<Dimension(); idim++) {
+                dphi_i_Timesdphi_j += dphi(idim, iphi)*dphi(idim,jphi);
+            }
+            EK(iphi,jphi) += weight*dphi_i_Timesdphi_j;//*data.detjac;
         }
     }
    // std::cout << EK << std::endl;
@@ -144,6 +147,11 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
     {
         VecDouble resloc(1);
         force(data.x, resloc);
+        if(resloc[0]!=0){
+            int ok=0;
+        }
+        std::cout<<"point: "<<data.x<<std::endl;
+        std::cout<<"forceval: "<<resloc[0]<<std::endl;
         res = resloc[0];
     }
 //    std::cout<<res<<std::endl;
@@ -220,8 +228,17 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
             Solout.resize(nstate);
             VecDouble sol(nstate);
             MatrixDouble dsol(3, nstate);
-            if(SolutionExact) this->SolutionExact(data.x, Solout, dsol);
-            else Solout.setZero();
+            if(SolutionExact){
+                std::cout<<"pointTest: "<<std::endl;
+                std::cout<<data.x<<std::endl;
+                this->SolutionExact(data.x, Solout, dsol);
+                
+                std::cout<<"ExactSol: "<<std::endl;
+                std::cout<<Solout<<std::endl;
+            }
+            
+            
+           // else Solout.setZero();
             //+++++++++++++++++
         }
             break;

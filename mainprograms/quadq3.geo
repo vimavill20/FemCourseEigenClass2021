@@ -3,9 +3,9 @@ SetFactory("OpenCASCADE");
 
 h=0;
 Point(1) = {0,0,0,h};
-Point(2) = {0,2,0,h};
-Point(3) = {2,2,0,h};
-Point(4) = {2,0,0,h};//+
+Point(2) = {0,1,0,h};
+Point(3) = {1,1,0,h};
+Point(4) = {1,0,0,h};//+
 Line(1) = {1, 4};
 //+
 Line(2) = {4, 3};
@@ -24,6 +24,7 @@ Physical Curve("bc2", 3) = {2};
 Physical Curve("bc3", 4) = {3};
 Physical Curve("bc4", 5) = {4};
 
-Transfinite Curve{:}=2;
+Transfinite Curve{1,3}=3;
+Transfinite Curve{2,4}=3;
 Transfinite Surface{1};
 Recombine Surface{1};

@@ -442,7 +442,8 @@ void VTKGeoMesh::PrintSolVTK(CompMesh *cmesh, PostProcess &defPostProc, const st
                     VecDouble xi(ParamCo.cols()), xco(3);
                     for(int i=0; i< xi.size(); i++) xi[i] = ParamCo(t,i);
                     gel->X(xi, xco);
-                    
+                    std::cout<<"PointSaalida"<<std::endl;
+                    std::cout<<xco<<std::endl;
                     VecDouble sol(1);
                     MatrixDouble dsol(2,1);
                     
