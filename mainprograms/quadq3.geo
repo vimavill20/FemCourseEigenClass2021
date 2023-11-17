@@ -24,7 +24,7 @@ Physical Curve("bc2", 3) = {2};
 Physical Curve("bc3", 4) = {3};
 Physical Curve("bc4", 5) = {4};
 
-Transfinite Curve{1,3}=3;
-Transfinite Curve{2,4}=3;
+Transfinite Curve{1,3}=10;
+Transfinite Curve{2,4}=10;
 Transfinite Surface{1};
 Recombine Surface{1};

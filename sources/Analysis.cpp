@@ -64,7 +64,6 @@ void Analysis::RunSimulation() {
     F.setZero();
 
     assemb.Compute(K, F);
-    std::cout<<"Força F de Analysis\n"<<F<<std::endl;
     std::cout << "Assemble done!" << std::endl;
 
     GlobalSystem = K;
@@ -75,12 +74,11 @@ void Analysis::RunSimulation() {
     SparseLU<SparseMat, COLAMDOrdering<int> >   solver;
     // Compute the ordering permutation vector from the structural pattern of A
     solver.analyzePattern(K); 
-    // Compute the numerical factorization 
+    // Compute the numerical factorization
     solver.factorize(K); 
     //Use the factors to solve the linear system 
     Solution = solver.solve(F); 
-    std::cout << Solution << std::endl;
-    std::cout << "Solution computed!" << std::endl;
+
     
     int solsize = Solution.rows();
     VecDouble sol(solsize);

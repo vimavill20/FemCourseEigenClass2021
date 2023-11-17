@@ -150,8 +150,6 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
         if(resloc[0]!=0){
             int ok=0;
         }
-        std::cout<<"point: "<<data.x<<std::endl;
-        std::cout<<"forceval: "<<resloc[0]<<std::endl;
         res = resloc[0];
     }
 //    std::cout<<res<<std::endl;
@@ -229,15 +227,8 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
             VecDouble sol(nstate);
             MatrixDouble dsol(3, nstate);
             if(SolutionExact){
-                std::cout<<"pointTest: "<<std::endl;
-                std::cout<<data.x<<std::endl;
                 this->SolutionExact(data.x, Solout, dsol);
-                
-                std::cout<<"ExactSol: "<<std::endl;
-                std::cout<<Solout<<std::endl;
             }
-            
-            
            // else Solout.setZero();
             //+++++++++++++++++
         }

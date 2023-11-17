@@ -63,17 +63,13 @@ void GeomQuad::X(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x) {
     MatrixDouble dphi(Dimension, nCorners);
     Shape(xi, phi, dphi);
     int space = NodeCo.rows();
-    std::cout<<"cords: " <<std::endl;
-    std::cout<<NodeCo<<std::endl;
-    std::cout<<"xi: " <<std::endl;
-    std::cout<<xi<<std::endl;
     for(int i = 0; i < space; i++) {
         x[i] = 0.0;
         for(int j = 0; j < 4; j++) {
             x[i] += phi[j]*NodeCo(i,j);
         }
     }
-    std::cout<<"xMap: " <<x<<std::endl;
+
 
   
 }
