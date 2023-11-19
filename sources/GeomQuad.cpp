@@ -57,7 +57,7 @@ void GeomQuad::X(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x) {
         x.resize(2);
     }
    // DebugStop();
-    x.setZero();
+    //x.setZero();
     
     VecDouble phi(nCorners);
     MatrixDouble dphi(Dimension, nCorners);

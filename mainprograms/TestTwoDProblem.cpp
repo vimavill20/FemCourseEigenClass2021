@@ -44,7 +44,7 @@ int main ()
    
     read.Read(gmesh,filename);
     const std::string filenamevtk("geomesh.vtk");
-    VTKGeoMesh::PrintGMeshVTK(&gmesh, filenamevtk);
+    /*VTKGeoMesh::PrintGMeshVTK(&gmesh, filenamevtk);*/
     
     CompMesh cmesh(&gmesh);
     MatrixDouble perm(3,3);
@@ -59,7 +59,7 @@ int main ()
     
     auto force = [](const VecDouble &x, VecDouble &res)
     {
-        res[0] = 2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];
+        res[0] =1; /*2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];*/
     };
     mat1->SetForceFunction(force);
     MatrixDouble proj(1,1),val1(1,1),val2(1,1);
