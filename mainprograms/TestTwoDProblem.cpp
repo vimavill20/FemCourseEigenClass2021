@@ -29,10 +29,11 @@ int main ()
 {
     GeoMesh gmesh;
     ReadGmsh read;
-    std::string filename("/Users/victorvillegassalabarria/Documents/Github/FemCourseEigenClass2021/mainprograms/quads.msh");
+    std::string filename("/Users/victorvillegassalabarria/Documents/Github/MalhasTarefaFEM/quadq3.msh");
 #ifdef MACOSX
     filename = "../"+filename;
 #endif
+    gmesh.SetDimension(2);
     read.Read(gmesh,filename);
 
     CompMesh cmesh(&gmesh);
@@ -53,15 +54,24 @@ int main ()
     proj.setZero();
     val1.setZero();
     val2.setZero();
-    L2Projection *bc_linha = new L2Projection(0,2,proj,val1,val2);
-    L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
-    std::vector<MathStatement *> mathvec = {0,mat1,bc_point,bc_linha};
+    int matIdBC1 = 2;
+    int matIdBC2 = 3;
+    int matIdBC3 = 4;
+    int matIdBC4 = 5;
+    int bcN = 0;
+    int bcD = 0;
+    L2Projection *bc_linha1 = new L2Projection(bcN,matIdBC1,proj,val1,val2);
+    L2Projection *bc_linha2 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
+    L2Projection *bc_linha3 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
+    L2Projection *bc_linha4 = new L2Projection(bcN,matIdBC3,proj,val1,val2);
+        //L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
+    std::vector<MathStatement *> mathvec = {0,mat1,bc_linha1,bc_linha2,bc_linha3,bc_linha4};
     cmesh.SetMathVec(mathvec);
     cmesh.SetDefaultOrder(1);
     cmesh.AutoBuild();
     cmesh.Resequence();
 
-        Analysis locAnalysis(&cmesh);
+    Analysis locAnalysis(&cmesh);
     locAnalysis.RunSimulation();
     PostProcessTemplate<Poisson> postprocess;
     auto exact = [](const VecDouble &x, VecDouble &val, MatrixDouble &deriv)
