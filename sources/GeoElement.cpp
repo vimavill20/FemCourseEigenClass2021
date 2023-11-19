@@ -96,8 +96,8 @@ void GeoElement::Jacobian(const MatrixDouble &gradx, MatrixDouble &jac, MatrixDo
             break;
         case 2:
         {
-            VecDouble v_1(3), v_2(3);
-            VecDouble v_1_til(3), v_2_til(3);
+            VecDouble v_1(4), v_2(4);
+            VecDouble v_1_til(4), v_2_til(4);
             v_1.setZero();
             v_2.setZero();
             v_1_til.setZero();
