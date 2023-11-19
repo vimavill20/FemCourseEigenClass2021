@@ -36,7 +36,7 @@ int main ()
     GeoMesh gmesh;
     
     ReadGmsh read;
-    std::string filename("/Users/jose/Documents/Github/FemCourseEigenClass2021/mainprograms/quadq3.msh");
+    std::string filename("/Users/victorvillegassalabarria/Documents/Github/FemCourseEigenClass2021/mainprograms/quadq3.msh");
 
 #ifdef MACOSX
     filename = "../"+filename;
