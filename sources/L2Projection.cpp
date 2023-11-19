@@ -58,17 +58,19 @@ void L2Projection::SetProjectionMatrix(const MatrixDouble &proj) {
 void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &EK, MatrixDouble &EF) const {
 
     int nstate = this->NState();
-    if(nstate != 1)
-    {
-        std::cout << "Please implement me\n";
+    auto nshape = data.phi.size();
+    auto &phi=data.phi;
+    const int phr= phi.rows();
+    if(nstate != 1){
         DebugStop();
     }
-    auto nshape = data.phi.size();
+    
+    
     if(EK.rows() != nshape || EF.rows() != nshape)
     {
         DebugStop();
     }
-
+    int iv, in,jn;
     VecDouble result(nstate);
     result[0] = Val2()(0,0);
     MatrixDouble deriv(data.x.size(), nstate);
@@ -84,13 +86,25 @@ void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &E
         case 0:
         {
             // Your code here
-            EF+= weight*data.phi*result[0]*gBigNumber;
-            EK+= gBigNumber*weight*data.phi*data.phi.transpose();
+            for( iv=0; iv<nstate; iv++){
+                for( in=0; in<phr;in++){
+                    EF(nstate*in+iv,0)+=weight*phi(in,0)*result[0]*gBigNumber;
+                    for( jn=0; jn<phr;jn++){
+                        EK(nstate*in+iv,nstate*jn+iv)+= weight*phi(in,0)*phi(jn,0)*gBigNumber;
+                    }
+                }
+    }
+            ;
             break;
         }
-
         case 1:
         {
+            for(auto iv = 0; iv < nstate; iv++){
+                for(auto in = 0 ; in < phr; in++) {
+                    EF(nstate*in+iv,0) += Val2()(iv,0)*phi(in,0) * weight*gBigNumber;
+                    }//in
+                }//iv
+                         // Your code here
             // Your code here
             
             break;
@@ -160,8 +174,9 @@ void L2Projection::PostProcessSolution(const IntPointData &data, const int var, 
         {
             //+++++++++++++++++
             // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
+            Solout.resize(nstate);
+            for (int i = 0; i < nstate; i++) {
+            Solout[i] = sol[i];
             //+++++++++++++++++
         }
             break;
@@ -170,8 +185,13 @@ void L2Projection::PostProcessSolution(const IntPointData &data, const int var, 
         {
             //+++++++++++++++++
             // Please implement me
-            std::cout << "\nPLEASE IMPLEMENT ME\n" << __PRETTY_FUNCTION__ << std::endl;
-            DebugStop();
+            Solout.resize(rows * cols);
+                for (int i = 0; i < rows; i++) {
+                    for (int j = 0; j < cols; j++) {
+                        Solout[i * cols + j] = gradu(i, j);
+                        //+++++++++++++++++
+                    }
+                }
             //+++++++++++++++++
         }
             break;
@@ -183,3 +203,6 @@ void L2Projection::PostProcessSolution(const IntPointData &data, const int var, 
         }
     }
 }
+
+}
+

@@ -66,6 +66,8 @@ void Assemble::Compute(SparseMat &globmat, MatrixDouble &rhs) {
         ef.setZero();
 //neql en funcao de nshape
         cel->CalcStiff(ek, ef);
+        std::cout<<ek<<std::endl;
+        std::cout<<ef<<std::endl;
         // Calcular los indices en la matriz global
         int count=0;
         const int64_t ndof =cel->NDOF();

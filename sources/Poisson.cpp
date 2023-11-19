@@ -220,8 +220,9 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
             Solout.resize(nstate);
             VecDouble sol(nstate);
             MatrixDouble dsol(3, nstate);
-            if(SolutionExact) this->SolutionExact(data.x, Solout, dsol);
-            else Solout.setZero();
+            if(SolutionExact) {this->SolutionExact(data.x, Solout, dsol);
+            }
+            //else Solout.setZero();
             //+++++++++++++++++
         }
             break;

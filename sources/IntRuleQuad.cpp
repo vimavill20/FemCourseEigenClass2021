@@ -20,16 +20,12 @@ IntRuleQuad::IntRuleQuad(int order) {
 
 void IntRuleQuad::SetOrder(int order) {
     fOrder = order;
-    int np=order/2 +1;
+    /*int np=order/2 +1;*/
     VecDouble co,w;
-    fWeights.resize(np,1);
+    
     gaulegQuad(-1., 1., co, fWeights);
-    for(int ip=0;ip<np;ip++){
-        this->fPoints.resize(np,2);
-        fWeights.resize(np);
-        
-    }
-    fOrder = order;
+    
+    
     if (order < 0 || order > MaxOrder()) DebugStop();
     if (order == 0 || order == 1) {
         fPoints.resize(1, 2);
@@ -84,7 +80,7 @@ void IntRuleQuad::SetOrder(int order) {
         fPoints (8 ,1 )=      sqrt (    3./    5.);
         fWeights [8 ]=      25./    81.;
         } else {
-            DebugStop();
+        DebugStop();
         
     }
 }
@@ -108,10 +104,9 @@ void IntRuleQuad::gaulegQuad(const double x1, const double x2, VecDouble &co, Ve
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            co(i+j*n) = cox[j];
-            co(i*n+j) = coy[i];
-            std::cout<< "Punto x: ("<<i*n+j<<",0) "<<co(i+j*n)<< " Punto y: ("<<i*n+j<<",1) "<<co(i*n+j)<<std::endl;
-            w[n * i + j] = wx[j] * wy[i];
+            co[i+j*n] = cox[j];
+            co[j + i * n + n * n] = coy[i];
+            w[n * i + j] = wx[i] * wy[j];
             }
         }
     }
