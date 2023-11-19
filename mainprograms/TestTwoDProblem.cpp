@@ -59,7 +59,7 @@ int main ()
     
     auto force = [](const VecDouble &x, VecDouble &res)
     {
-        res[0] =1; /*2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];*/
+        res[0] = 2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];
     };
     mat1->SetForceFunction(force);
     MatrixDouble proj(1,1),val1(1,1),val2(1,1);
@@ -106,9 +106,9 @@ int main ()
     PostProcessTemplate<Poisson> postprocess;
     auto exact = [](const VecDouble &x, VecDouble &val, MatrixDouble &deriv)
     {
-        val[0] = (1.-x[0])*x[0]*(1-x[1])*x[1];
-        deriv(0,0) = (1.-2.*x[0])*(1-x[1])*x[1];
-        deriv(1,0) = (1-2.*x[1])*(1-x[0])*x[0];
+        val[0] = sin(M_PI *x[0])*cos(M_PI *x[1]); //(1.-x[0])*x[0]*(1-x[1])*x[1];
+        deriv(0,0) = //(1.-2.*x[0])*(1-x[1])*x[1];
+        deriv(1,0) = //(1-2.*x[1])*(1-x[0])*x[0];
     };
     postprocess.SetExact(exact);
     mat1->SetExactSolution(exact);
