@@ -118,7 +118,6 @@ VecDouble Analysis::PostProcessError(std::ostream &out, PostProcess &defPostProc
         if (el) {
             if (el->GetStatement()->GetMatID() == 1) {
                 errors.setZero();
-            
                 el->EvaluateError(fExact, errors);
                 int nerrors = errors.size();
                 if(values.size() != nerrors)

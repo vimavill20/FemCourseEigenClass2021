@@ -49,6 +49,7 @@ int main ()
     {
         res[0] = 2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];
     };
+    
     mat1->SetForceFunction(force);
     MatrixDouble proj(1,1),val1(1,1),val2(1,1);
     proj.setZero();
@@ -63,7 +64,7 @@ int main ()
     val1(0,0)=0.0;
     val2(0,0)=0.0;
     L2Projection *bc_linha1 = new L2Projection(bcD,matIdBC1,proj,val1,val2);
-    L2Projection *bc_linha2 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
+    L2Projection *bc_linha2 = new L2Projection(bcD,matIdBC2,proj,val1,val2);
     L2Projection *bc_linha3 = new L2Projection(bcD,matIdBC2,proj,val1,val2);
     L2Projection *bc_linha4 = new L2Projection(bcD,matIdBC3,proj,val1,val2);
         //L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
@@ -82,8 +83,9 @@ int main ()
         deriv(0,0) = (1.-2.*x[0])*(1-x[1])*x[1];
         deriv(1,0) = (1-2.*x[1])*(1-x[0])*x[0];
     };
-    postprocess.SetExact(exact);
     mat1->SetExactSolution(exact);
+    postprocess.SetExact(exact);
+    
 
 //    if (!strcmp("Sol", name.c_str())) return ESol;
 //    if (!strcmp("DSol", name.c_str())) return EDSol;
@@ -92,13 +94,10 @@ int main ()
 //    if (!strcmp("SolExact", name.c_str())) return ESolExact;
 //    if (!strcmp("DSolExact", name.c_str())) return EDSolExact;
     postprocess.AppendVariable("Sol");
-    postprocess.AppendVariable("DSol");
-    postprocess.AppendVariable("Flux");
-    postprocess.AppendVariable("Force");
     postprocess.AppendVariable("SolExact");
-    postprocess.AppendVariable("DSolExact");
+
     
-    locAnalysis.PostProcessSolution("quads.vtk", postprocess);
+    locAnalysis.PostProcessSolution("quadstar.vtk", postprocess);
 
     VecDouble errvec;
     errvec = locAnalysis.PostProcessError(std::cout, postprocess);
