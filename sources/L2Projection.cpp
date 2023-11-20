@@ -90,7 +90,7 @@ void L2Projection::Contribute(IntPointData &data, double weight, MatrixDouble &E
                 for( in=0; in<phr;in++){
                     EF(nstate*in+iv,0)+=weight*phi(in,0)*result[0]*gBigNumber;
                     for( jn=0; jn<phr;jn++){
-                        EK(nstate*in+iv,nstate*jn+iv)+= weight*phi(in,0)*phi(jn,0)*gBigNumber;
+                        EK(nstate*in+iv,nstate*jn+iv)+= gBigNumber*weight*phi(in,0)*phi(jn,0);
                     }
                 }
     }
@@ -186,12 +186,12 @@ void L2Projection::PostProcessSolution(const IntPointData &data, const int var, 
             //+++++++++++++++++
             // Please implement me
             Solout.resize(rows * cols);
-                for (int i = 0; i < rows; i++) {
-                    for (int j = 0; j < cols; j++) {
-                        Solout[i * cols + j] = gradu(i, j);
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    Solout[i * cols + j] = gradu(i, j);
                         //+++++++++++++++++
-                    }
                 }
+            }
             //+++++++++++++++++
         }
             break;

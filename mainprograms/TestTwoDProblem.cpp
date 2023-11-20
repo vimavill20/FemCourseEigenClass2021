@@ -47,7 +47,7 @@ int main ()
 
     auto force = [](const VecDouble &x, VecDouble &res)
     {
-        res[0] = 1;/*2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];*/
+        res[0] = 2.*(1.-x[0])*x[0]+2.*(1-x[1])*x[1];
     };
     mat1->SetForceFunction(force);
     MatrixDouble proj(1,1),val1(1,1),val2(1,1);
@@ -60,12 +60,12 @@ int main ()
     int matIdBC4 = 5;
     int bcN = 1;
     int bcD = 0;
-    val1(0,0)=0;
-    val2(0,0)=0;
-    L2Projection *bc_linha1 = new L2Projection(bcN,matIdBC1,proj,val1,val2);
-    L2Projection *bc_linha2 = new L2Projection(bcD,matIdBC2,proj,val1,val2);
+    val1(0,0)=0.0;
+    val2(0,0)=0.0;
+    L2Projection *bc_linha1 = new L2Projection(bcD,matIdBC1,proj,val1,val2);
+    L2Projection *bc_linha2 = new L2Projection(bcN,matIdBC2,proj,val1,val2);
     L2Projection *bc_linha3 = new L2Projection(bcD,matIdBC2,proj,val1,val2);
-    L2Projection *bc_linha4 = new L2Projection(bcN,matIdBC3,proj,val1,val2);
+    L2Projection *bc_linha4 = new L2Projection(bcD,matIdBC3,proj,val1,val2);
         //L2Projection *bc_point = new L2Projection(0,3,proj,val1,val2);
     std::vector<MathStatement *> mathvec = {0,mat1,bc_linha1,bc_linha2,bc_linha3,bc_linha4};
     cmesh.SetMathVec(mathvec);

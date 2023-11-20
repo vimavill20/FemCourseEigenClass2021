@@ -49,31 +49,31 @@ void ShapeQuad::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, Matri
     dphi(0, 3) = 0.25 * (-1 - eta);
     dphi(1, 3) = 0.25*(1. - csi);
     int count = 4;
-        for (int i = 4; i < 8; i ++) {
-            if (orders[i] == 2) {
-                int aux1 = i % 4;
-                int aux2 = (i + 1) % 4;
-                int aux3 = (i + 2) % 4 ;
-                phi[count] = 4. * phi[aux1] * (phi[aux2] + phi[aux3]);
+    for (int i = 4; i < 8; i ++) {
+        if (orders[i] == 2) {
+            int aux1 = i % 4;
+            int aux2 = (i + 1) % 4;
+            int aux3 = (i + 2) % 4 ;
+            phi[count] = 4. * phi[aux1] * (phi[aux2] + phi[aux3]);
                 dphi(0, count) = 4. * (dphi(0, aux1) * (phi[aux2] + phi[aux3]) + phi[aux1] * (dphi(0, aux2) + dphi(0, aux3)));
-                dphi(1, count) = 4. * (dphi(1, aux1) * (phi[aux2] + phi[aux3]) + phi[aux1] * (dphi(1, aux2) + dphi(1, aux3)));
+            dphi(1, count) = 4. * (dphi(1, aux1) * (phi[aux2] + phi[aux3]) + phi[aux1] * (dphi(1, aux2) + dphi(1, aux3)));
 
-                count++;
-                }
+            count++;
+        }
 
-                else if (orders[i] != 1) DebugStop();
+        else if (orders[i] != 1) DebugStop();
 
-            }
+        }
             
             
-            if (orders[8] == 2) {
-                phi[count] = 16. * phi[0] * phi[2];
-                dphi(0, count) = 16. * (dphi(0, 0) * phi[2] + phi[0] * dphi(0, 2));
-                dphi(1, count) = 16. * (dphi(1, 0) * phi[2] + phi[0] * dphi(1, 2));
+        if (orders[8] == 2) {
+            phi[count] = 16. * phi[0] * phi[2];
+            dphi(0, count) = 16. * (dphi(0, 0) * phi[2] + phi[0] * dphi(0, 2));
+            dphi(1, count) = 16. * (dphi(1, 0) * phi[2] + phi[0] * dphi(1, 2));
                 count++;
-            }
-            else if (orders[8] != 1) DebugStop();
-            if (count != nshape) DebugStop();
+        }
+        else if (orders[8] != 1) DebugStop();
+        if (count != nshape) DebugStop();
     
 }
 
