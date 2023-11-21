@@ -29,7 +29,7 @@ int main ()
 {
     GeoMesh gmesh;
     ReadGmsh read;
-    std::string filename("/Users/victorvillegassalabarria/Documents/Github/MalhasTarefaFEM/MallaTriangular.msh");
+    std::string filename("/Users/victorvillegassalabarria/Documents/Github/MalhasTarefaFEM/Triang2El.msh");
 #ifdef MACOSX
     filename = "../"+filename;
 #endif

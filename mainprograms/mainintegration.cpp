@@ -22,12 +22,29 @@ using std::cin;
 
 void Integrate1D();
 void Integrate2DQuad();
+void Integrate2DTriang();
 
 int main() {
-    Integrate2DQuad();
-    Integrate1D();
+    Integrate2DTriang();
+//    Integrate2DQuad();
+//    Integrate1D();
     return 0;
 }
+void Integrate2DTriang (){
+    auto func = [](VecDouble x){return x[0]*x[0]*x[1]*x[1];};
+    IntRuleTriangle quadrule(2/*order*/);
+    int np = quadrule.NPoints();
+    quadrule.Print(std::cout);
+    double integral=0.;
+    VecDouble co(2);
+    double weight;
+    for (int ip=0; ip<np; ip++){
+        quadrule.Point(ip,co,weight);
+        double val=func(co);
+        integral+=val*weight;
+        }
+    std::cout<<  "Espera se 4/9 obtem se: "<<integral<<std::endl;
+    }
 void Integrate2DQuad (){
     auto func = [](VecDouble x){return x[0]*x[0]*x[1]*x[1];};
     IntRuleQuad quadrule(2/*order*/);

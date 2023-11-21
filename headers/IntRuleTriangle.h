@@ -48,7 +48,8 @@ class IntRuleTriangle : public IntRule
     }
     // Method to set polynomial order of the integration rule for triangle elements
     virtual void SetOrder(int order) override;
-  
+    
+    static void gaulegTrian(const double x1, const double x2, VecDouble &x, VecDouble &w);
 };
 
 

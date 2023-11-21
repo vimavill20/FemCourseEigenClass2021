@@ -66,7 +66,7 @@ void Assemble::Compute(SparseMat &globmat, MatrixDouble &rhs) {
         ef.setZero();
 //neql en funcao de nshape
         cel->CalcStiff(ek, ef);
-        std::cout<<"Ek: "<<std::endl;
+        std::cout<<"Ek para elemento : "<<el<<std::endl;
         std::cout<<ek<<std::endl;
         std::cout<<"Ef: "<<std::endl;
         std::cout<<ef<<std::endl;

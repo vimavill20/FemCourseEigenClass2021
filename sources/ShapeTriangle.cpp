@@ -31,18 +31,23 @@ void ShapeTriangle::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, M
     }
     
     // Linear order
-    phi[0] =  1.-xi[0]-xi[1];
-    phi[1] =  xi[0];
-    phi[2] =  xi[1];
-    dphi(0,0) = -1.;
-    dphi(1,0) = -1.;
-    dphi(0,1) =  1.;
-    dphi(1,1) =  0.;
-    dphi(0,2) =  0.;
-    dphi(1,2) =  1.;
+    int nshape = NShapeFunctions(orders);
+    phi.resize(nshape);
+    dphi.resize(2,nshape);
+    double csi=xi[0];
+    double eta=xi[1];
+    phi[0] = 1-csi-eta;
+    dphi(0,0)= -1;
+    dphi(1,0)=-1;
+    phi[1] = csi;
+    dphi(0,1)=1;
+    dphi(1,1)= 0;
+    phi[2] = eta;
+    dphi(0,2)=0;
+    dphi(1,2)=1;
     
-    std::cout << "Please implement me\n";
-    DebugStop();
+//    std::cout << "Please implement me\n";
+//    DebugStop();
     
     
 }
