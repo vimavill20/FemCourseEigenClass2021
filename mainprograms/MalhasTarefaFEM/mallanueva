@@ -1,0 +1,2 @@
+// Gmsh project created on Mon Nov 13 10:19:50 2023
+SetFactory("OpenCASCADE");
