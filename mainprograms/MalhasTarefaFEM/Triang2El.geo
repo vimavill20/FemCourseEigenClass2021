@@ -6,9 +6,9 @@
 SetFactory("OpenCASCADE");
 
 // Variaveis de entrada do codigo geo
-elements = 1; // numero de elementos (alterar para fazer o projeto)
+elements = 2; // numero de elementos (alterar para fazer o projeto)
 nodes = elements + 1; // numero de nós (gerando malhas com mesmo numero de nos na base e na altura)
-recombine = 0; // fator para decidir se a malha é triangular (0) ou quadricular (1)
+recombine = 1; // fator para decidir se a malha é triangular (0) ou quadricular (1)
 lc = 5e-1;
 
 // ++++++++++++++++++++++++++++++ //
@@ -39,10 +39,10 @@ Plane Surface(1) = {1};
 // Organizadas em "nome", "materialID"
 Physical Surface("Domain", 1) = {1};
 
-Physical Curve("BCleft", 2) = {4};
-Physical Curve("BCright", 3) = {2};
-Physical Curve("BCbottom", 4) = {1};
-Physical Curve("BCtop", 5) = {3};
+Physical Curve("BCleft", 2) = {1,2,3,4};
+//Physical Curve("BCright", 2) = {2};
+//Physical Curve("BCbottom", 2) = {1};
+//Physical Curve("BCtop", 2) = {3};
 
 // ++++++++++++++++++++++++++++++ //
 // 	DEFININDO OS PARAMETROS DA MALHA //

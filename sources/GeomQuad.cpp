@@ -59,7 +59,7 @@ void GeomQuad::X(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x) {
     for(int i = 0; i < space; i++) {
         x[i] = 0.0;
         for(int j = 0; j < 4; j++) {
-            x[i] += phi(j,0)*NodeCo(i,j);
+            x[i] += phi[j]*NodeCo(i,j);
         }
 
     }

@@ -48,6 +48,43 @@ void ShapeQuad::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, Matri
     dphi(1, 2) = 0.25*(1. + csi);
     dphi(0, 3) = 0.25 * (-1 - eta);
     dphi(1, 3) = 0.25*(1. - csi);
+    //Implementation in class 22 nov
+//    const double phibolha=16*phi[0]*phi[2];
+//    VecDouble dphibolha(2,1);
+//    dphibolha[0]=16*(dphi(0,0)*phi[2]+phi[0]*dphi(0,2));
+//    dphibolha[1]=16*(dphi(1,0)*phi[2]+phi[0]*dphi(1,2));
+//    int count=4;
+//    for(int i=4;i<9;i++){
+//        if(orders[i]==2){
+//            int aux1, aux2;
+//            aux1=SideNodeLocIndex(i, 0);
+//            aux2=SideNodeLocIndex(i, 1);
+//
+//            phi[count]=4*phi[aux1]*phi[aux2]+phibolha/4.;
+//
+//            dphi(0,count)=4*(dphi(0,aux1)*phi[aux2]+phi[aux1]*dphi(0,aux2)+dphibolha[0]/4.);
+//            dphi(0,count++)=4*(dphi(1,aux1)*phi[aux2]+phi[aux1]*dphi(1,aux2)+dphibolha[1]/4.);
+//
+//        }else if (orders[i]!=1){
+//            DebugStop();
+//        }
+//    }
+//    if (orders[8]==2){
+//        phi[0]=phibolha;
+//        dphi(0,8)=dphibolha[0];
+//        dphi(1,8)=dphibolha[1];
+        
+//    }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+        //
     int count = 4;
     for (int i = 4; i < 8; i ++) {
         if (orders[i] == 2) {
