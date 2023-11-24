@@ -191,8 +191,9 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     ek.setZero();
     ef.setZero();
     IntRule* intrule = this->GetIntRule();
-    int maxIntOrder = 3;
-    intrule->SetOrder(maxIntOrder);
+    //int maxIntOrder = 3;
+    int order = this->GetCompMesh()->GetDefaultOrder();
+    intrule->SetOrder(2* order);
 
     IntPointData data;
     this->InitializeIntPointData(data);
@@ -203,6 +204,7 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     for (int nint = 0; nint < nintpoints; nint++) {
         intrule->Point(nint, data.ksi, weight);
         this->ComputeRequiredData(data, data.ksi);
+        
         weight *= fabs(data.detjac);
         material->Contribute(data, weight, ek, ef);
     }

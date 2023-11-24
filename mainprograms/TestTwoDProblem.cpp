@@ -30,7 +30,7 @@ int main ()
 {
     GeoMesh gmesh;
     ReadGmsh read;
-    std::string filename("//Users/victorvillegassalabarria/Documents/Github/FemCourseEigenClass2021/mainprograms/MalhasTarefaFEM/Triang2El.msh");
+    std::string filename("//Users/jose/Documents/Github/FemCourseEigenClass2021/mainprograms/MalhasTarefaFEM/Triang2El.msh");
 #ifdef MACOSX
     filename = "../"+filename;
 #endif
@@ -89,7 +89,7 @@ int main ()
     bc_linha->SetExactSolution(exact);
     cmesh.SetMathStatement(1, mat1);
     cmesh.SetMathStatement(2,bc_linha);
-    cmesh.SetDefaultOrder(1);
+    cmesh.SetDefaultOrder(2);
     cmesh.AutoBuild();
     cmesh.Resequence();
 

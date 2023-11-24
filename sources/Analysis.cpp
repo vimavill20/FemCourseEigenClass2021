@@ -78,7 +78,7 @@ void Analysis::RunSimulation() {
     solver.factorize(K); 
     //Use the factors to solve the linear system 
     Solution = solver.solve(F); 
-    std::cout << Solution << std::endl;
+   // std::cout << Solution << std::endl;
     std::cout << "Solution computed!" << std::endl;
     
     int solsize = Solution.rows();

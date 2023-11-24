@@ -25,19 +25,23 @@ GeomTriangle& GeomTriangle::operator=(const GeomTriangle& copy) {
 
 void GeomTriangle::Shape(const VecDouble& xi, VecDouble& phi, MatrixDouble& dphi) {
     if(xi.size() != Dimension || phi.size() != nCorners || dphi.rows() != Dimension || dphi.cols() != nCorners) DebugStop();
+    double csi = xi[0];
+    double eta = xi[1];
+
     phi.resize(3);
-    dphi.resize(2,3);
-    double csi=xi[0];
-    double eta=xi[1];
-    phi[0] = 1-csi-eta;
-    dphi(0,0)= -1;
-    dphi(1,0)=-1;
-    phi[1] = csi;
-    dphi(0,1)=1;
-    dphi(1,1)= 0;
-    phi[2] = eta;
-    dphi(0,2)=0;
-    dphi(1,2)=1;
+    dphi.resize(2, 3);
+
+    phi(0) = 1. - csi - eta;
+    dphi(0, 0) = -1.;
+    dphi(1, 0) = -1.;
+
+    phi(1) = csi;
+    dphi(0, 1) = 1.;
+    dphi(1, 1) = 0.;
+
+    phi(2) = eta;
+    dphi(0, 2) = 0.;
+    dphi(1, 2) = 1.;
 }
 
 void GeomTriangle::X(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x) {
@@ -74,6 +78,7 @@ void GeomTriangle::GradX(const VecDouble &xi, MatrixDouble &NodeCo, VecDouble &x
     Shape(xi, phi, dphi);
     int space = NodeCo.rows();
     gradx.resize(3,2);
+    gradx.setZero();
     for(int i = 0; i < 3; i++)
     {
         for(int j = 0; j < space; j++)

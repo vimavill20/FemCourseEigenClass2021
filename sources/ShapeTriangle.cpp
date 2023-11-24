@@ -30,25 +30,56 @@ void ShapeTriangle::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, M
         DebugStop();
     }
     
-    // Linear order
+    
     int nshape = NShapeFunctions(orders);
+    double csi = xi[0];
+    double eta = xi[1];
+
     phi.resize(nshape);
-    dphi.resize(2,nshape);
-    double csi=xi[0];
-    double eta=xi[1];
-    phi[0] = 1-csi-eta;
-    dphi(0,0)= -1;
-    dphi(1,0)=-1;
+    dphi.resize(2, nshape);
+
+    phi[0] = (1. - csi - eta);
     phi[1] = csi;
-    dphi(0,1)=1;
-    dphi(1,1)= 0;
     phi[2] = eta;
-    dphi(0,2)=0;
-    dphi(1,2)=1;
+
+    dphi(0, 0) = -1.;
+    dphi(1, 0) = -1.;
+    dphi(0, 1) = 1.;
+    dphi(1, 1) = 0.;
+    dphi(0, 2) = 0.;
+    dphi(1, 2) = 1.;
+
+    int count = 3;
+
+    for (int i = 3; i < 6; i++) {
+        if (orders[i] == 2) {
+
+            int aux1 = i % 3;
+            int aux2 = (i + 1) % 3;
+
+            phi[count] = 4. * phi[aux1] * phi[aux2];
+            dphi(0, count) = 4. * (dphi(0, aux1) * phi[aux2] + phi[aux1] * dphi(0, aux2));
+            dphi(1, count) = 4. * (dphi(1, aux1) * phi[aux2] + phi[aux1] * dphi(1, aux2));
+
+            count++;
+        }
+
+        else if (orders[i] != 1) DebugStop();
+
+    }
+
+    if (orders[6] == 3) {
+        phi[count] = 27. * phi[0] * phi[1]* phi[2];
+       
+        dphi(0, count) = 27. *((dphi(0, 0) * phi[1] + phi[0] * dphi(0, 1)) * phi[2] + (phi[0]*phi[1])*dphi(0,2));
+        dphi(1, count) = 27. *((dphi(1, 0) * phi[1] + phi[0] * dphi(1, 1)) * phi[2] + (phi[0] * phi[1]) * dphi(1, 2));
+
+        count++;
+    }
     
-//    std::cout << "Please implement me\n";
-//    DebugStop();
-    
+    else if (orders[6] != 1 && orders[6] != 2) DebugStop();
+
+    if (count != nshape) DebugStop();
     
 }
 

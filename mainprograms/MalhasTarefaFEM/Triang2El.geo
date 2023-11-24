@@ -8,7 +8,7 @@ SetFactory("OpenCASCADE");
 // Variaveis de entrada do codigo geo
 elements = 2; // numero de elementos (alterar para fazer o projeto)
 nodes = elements + 1; // numero de nós (gerando malhas com mesmo numero de nos na base e na altura)
-recombine = 1; // fator para decidir se a malha é triangular (0) ou quadricular (1)
+recombine = 0; // fator para decidir se a malha é triangular (0) ou quadricular (1)
 lc = 5e-1;
 
 // ++++++++++++++++++++++++++++++ //

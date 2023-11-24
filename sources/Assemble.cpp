@@ -8,6 +8,7 @@
 #include "GeoMesh.h"
 #include "MathStatement.h"
 #include "CompElement.h"
+#include "GeoElement.h"
 
 
 
@@ -65,8 +66,11 @@ void Assemble::Compute(SparseMat &globmat, MatrixDouble &rhs) {
         ek.setZero();
         ef.setZero();
 //neql en funcao de nshape
+        
         cel->CalcStiff(ek, ef);
         std::cout<<"Ek para elemento : "<<el<<std::endl;
+        
+        std::cout<<"Ek para elemento geo: "<<cel->GetGeoElement()->GetIndex()<<std::endl;
         std::cout<<ek<<std::endl;
         std::cout<<"Ef: "<<std::endl;
         std::cout<<ef<<std::endl;
