@@ -154,7 +154,6 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
         //std::cout<<data.detjac<<std::endl;
         EF(iphi,0) += res*weight*phi(iphi,0);//*(data.detjac);
     }
-    std::cout<<"det jac: "<<data.detjac<<std::endl;
  
     //+++++++++++++++++
 }

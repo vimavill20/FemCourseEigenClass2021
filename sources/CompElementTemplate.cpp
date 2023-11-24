@@ -29,7 +29,6 @@ CompElementTemplate<Shape>::CompElementTemplate(int64_t ind, CompMesh *cmesh, Ge
     cmesh->SetNumberElement(nel);
     cmesh->SetElement(ind, this);
     intrule.SetOrder(2 * cmesh->GetDefaultOrder());
-    std::cout<<intrule.NPoints()<<std::endl;
     this->SetIntRule(&intrule);
     this->SetIndex(ind);
     this->SetCompMesh(cmesh);

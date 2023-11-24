@@ -68,12 +68,6 @@ void Assemble::Compute(SparseMat &globmat, MatrixDouble &rhs) {
 //neql en funcao de nshape
         
         cel->CalcStiff(ek, ef);
-        std::cout<<"Ek para elemento : "<<el<<std::endl;
-        
-        std::cout<<"Ek para elemento geo: "<<cel->GetGeoElement()->GetIndex()<<std::endl;
-        std::cout<<ek<<std::endl;
-        std::cout<<"Ef: "<<std::endl;
-        std::cout<<ef<<std::endl;
         // Calcular los indices en la matriz global
         int count=0;
         const int64_t ndof =cel->NDOF();
