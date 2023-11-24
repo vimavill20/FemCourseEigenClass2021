@@ -191,8 +191,8 @@ void CompElement::CalcStiff(MatrixDouble &ek, MatrixDouble &ef) const {
     ek.setZero();
     ef.setZero();
     IntRule* intrule = this->GetIntRule();
-    int maxIntOrder = 3;
-    intrule->SetOrder(maxIntOrder);
+    int order= this->GetCompMesh()->GetDefaultOrder();
+    intrule->SetOrder(2*order);
 
     IntPointData data;
     this->InitializeIntPointData(data);

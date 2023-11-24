@@ -38,7 +38,14 @@ void Shape1d::Shape(const VecDouble &xi, VecInt &orders, VecDouble &phi, MatrixD
     
     dphi(0,0) = -1.0/2.0;
     dphi(0,1) = +1.0/2.0;
-    
+    int aux = 2;
+
+            if (orders[aux] == 2) {
+                phi[2] = 4. * phi[0] * phi[1];
+                dphi(0, 2) = 4. * (dphi(0, 0) * phi[1] + phi[0] * dphi(0, 1));
+            }
+
+            else if (orders[aux] != 1) DebugStop();
    
         
   //  std::cout << "Please implement me\n";

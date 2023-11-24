@@ -153,7 +153,7 @@ void Poisson::Contribute(IntPointData &data, double weight, MatrixDouble &EK, Ma
         //  std::cout<<"phival "<<dphi(0,iphi)<<std::endl;
         //std::cout<<data.detjac<<std::endl;
         EF(iphi,0) += res*weight*phi(iphi,0);//*(data.detjac);
-        std::cout<<data.detjac<<std::endl;
+        //std::cout<<data.detjac<<std::endl;
        
     }
  
@@ -227,8 +227,8 @@ void Poisson::PostProcessSolution(const IntPointData &data, const int var, VecDo
             MatrixDouble dsol(3, nstate);
             if(SolutionExact) {this->SolutionExact(data.x, Solout, dsol);
             
-                std::cout<<"pointTest: "<<std::endl;
-                std::cout<<data.x<<std::endl;
+                //std::cout<<"pointTest: "<<std::endl;
+                //std::cout<<data.x<<std::endl;
                 
                 //std::cout<<"ExactSol: "<<std::endl;
                 //std::cout<<Solout<<std::endl;
