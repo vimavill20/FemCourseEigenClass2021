@@ -16,6 +16,7 @@
 //
 //
 #include <iostream>
+#include <fstream>
 #include <math.h>
 #include "GeoMesh.h"
 #include "ReadGmsh.h"
@@ -25,25 +26,153 @@
 #include "Analysis.h"
 #include "PostProcessTemplate.h"
 #include "VTKGeoMesh.h"
-//struct TarefaSimulations
-//{
-//    // geometric element index of the interface element
-//    std::vector<int> sim_order;
-//    // computational element index of the interface element
-//    std::vector<std::string> meshnames;
-//
-//    // computational element index of the interface element
-//    std::vector<const std::function<void(const VecDouble &loc, VecDouble &result, MatrixDouble &deriv)>> exact_sols;
-////
-//    std::vector<std::function<void(const VecDouble &co, VecDouble &result)>> forces;
-//
-//    std::vector<std::string> vtk_names;
-
-int main()
+struct AllSimulationData
 {
+    // geometric element index of the interface element
+    std::vector<int> sim_order;
+    // computational element index of the interface element
+    std::vector<std::string> meshnames;
+
+    // computational element index of the interface element
+    std::vector<std::string> vtk_names;
+//Simulación 1 funcion 1
+//       test.sim_order.push_back(1);
+//       test.meshnames.push_back(common_name + name_mesh1);
+//       test.exact_sols.push_back(exact1);
+//       test.forces.push_back(force1);
+//       test.vtk_names.push_back("MallaTri_func1_ordem1.vtk");
+};
+void CaseTwoD(AllSimulationData alldata, int idata);
+    
+int main()
+
+{
+    AllSimulationData test;
+    std::string common_name="/Users/victorvillegassalabarria/Downloads/MalhasProjeto/";
+          
+           std::string name_mesh1 ="MalhaAnelQuad.msh";
+           std::string name_mesh2 ="MalhaAnelQuadRef1.msh";
+           std::string name_mesh3 ="MalhaAnelQuadRef2.msh";
+           std::string name_mesh4 ="MalhaAnelQuadRef3.msh";
+           std::string name_mesh5 ="MalhaAnelQuadRef4.msh";
+           std::string name_mesh6 ="MalhaAnelTria.msh";
+           std::string name_mesh7 ="MalhaAnelTriaRef1.msh";
+           std::string name_mesh8 ="MalhaAnelTriarRef2.msh";
+           std::string name_mesh9 ="MalhaAnelTriarRef3.msh";
+           std::string name_mesh10="MalhaAnelTriarRef4.msh";
+    //Simulación 1 malla 1
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name + name_mesh1);
+       test.vtk_names.push_back("MallaQuad_ordem1.vtk");
+
+       //Simulation2 malla 2
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name + name_mesh2);
+       test.vtk_names.push_back("MallaQuad_Ref1_ordem1.vtk");
+
+       //Simulación 3 malla 3
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name + name_mesh3);
+       test.vtk_names.push_back("MallaQuad_Ref2_ordem1.vtk");
+
+       //Simulation4 malla 4
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name + name_mesh4);
+       test.vtk_names.push_back("MallaQuad_Ref3_ordem1.vtk");
+
+       // funcion 2
+       //Simulación 5 malla 5
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name + name_mesh5);
+       test.vtk_names.push_back("MallaQuad_Ref4_ordem1.vtk");
+
+       //Simulation 6 malla 3
+       test.sim_order.push_back(2);
+       test.meshnames.push_back(common_name + name_mesh1);
+       test.vtk_names.push_back("MallaQuad_ordem2.vtk");
+
+       //Simulación 7 malla 4
+       test.sim_order.push_back(2);
+       test.meshnames.push_back(common_name + name_mesh2);
+       test.vtk_names.push_back("MallaQuad_Ref1_ordem1.vtk");
+
+       //Simulation8 malla 4
+       test.sim_order.push_back(2);
+       test.meshnames.push_back(common_name + name_mesh3);
+       test.vtk_names.push_back("MallaQuad_Ref2_ordem2.vtk");
+
+       // funcion 3
+       //Simulación 9 malla 5
+       test.sim_order.push_back(2);
+       test.meshnames.push_back(common_name + name_mesh4);
+       test.vtk_names.push_back("MallaQuad_Ref3_ordem2.vtk");
+
+       //Simulation10 malla 5
+       test.sim_order.push_back(2);
+       test.meshnames.push_back(common_name + name_mesh5);
+       test.vtk_names.push_back("MallaQuad_Ref4_ordem2.vtk");
+
+       //Simulación 11 malla 6
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name +name_mesh6);
+       test.vtk_names.push_back("MallaTri_ordem1.vtk");
+
+       //Simulation12 malla 6
+       test.sim_order.push_back(1);
+       test.meshnames.push_back(common_name + name_mesh7);
+       test.vtk_names.push_back("MallaTri_Ref1_ordem1.vtk");
+
+    // funcion 4
+    //Simulación 13 malla 7
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh8);
+    test.vtk_names.push_back("MallaTri_Ref2_ordem1.vtk");
+
+    //Simulation14 malla 7
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh9);
+    test.vtk_names.push_back("MallaTri_Ref3_ordem2.vtk");
+
+    //Simulación 15 malla 8
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name +name_mesh10);
+    test.vtk_names.push_back("MallaTri_Ref4_ordem1.vtk");
+
+    //Simulation16 malla 8
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh6);
+    test.vtk_names.push_back("MallaTri_ordem2.vtk");
+
+    // funcion 5
+    //Simulación 17 malla 9
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh7);
+    test.vtk_names.push_back("MallaTri_Ref1_ordem2.vtk");
+
+    //Simulation18 malla 9
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh8);
+    test.vtk_names.push_back("MallaTri_Ref2_ordem2.vtk");
+
+    //Simulación 19 malla 10
+    test.sim_order.push_back(3);
+    test.meshnames.push_back(common_name +name_mesh9);
+    test.vtk_names.push_back("MallaTri_Ref3_ordem2.vtk");
+
+    //Simulation 20 malla 10
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh10);
+    test.vtk_names.push_back("MallaTri_Ref4_ordem2.vtk");
+    int nsim= test.sim_order.size();
+
+    for(int i=0; i<nsim; i++){
+        CaseTwoD(test, i);
+    }
+}
+void CaseTwoD(AllSimulationData alldata,int idata){
     GeoMesh gmesh;
     ReadGmsh read;
-    std::string filename=("/Users/victorvillegassalabarria/Downloads/MalhaAnelQuad.msh");;
+    std::string filename=alldata.meshnames[idata];//("/Users/victorvillegassalabarria/Downloads/MalhasProjeto/MalhaAnelTria.msh");
     #ifdef MACOSX
     filename = "../"+filename;
     #endif
@@ -63,20 +192,20 @@ int main()
     auto force = [](const VecDouble &x, VecDouble &res)
     {
         const double tempx=x[0], tempy=x[1];
-        res[0]=-(2*tempx*tempx) -(2*tempy*tempy);
-        //res[0]=10*(M_PI*M_PI)*sin(3*M_PI*tempx)*sin(M_PI*tempy);
+//        res[0]=0;//-(2*tempx*tempx) -(2*tempy*tempy);
+        res[0]=10*(M_PI*M_PI)*sin(3*M_PI*tempx)*sin(M_PI*tempy);
         
         
     };
     auto exact = [](const VecDouble &x, VecDouble &val, MatrixDouble &deriv)
         {
             const double tempx=x[0], tempy=x[1];
-//            val[0]= sin(3 * M_PI * tempx) * sin( M_PI * tempy);// + tempy*tempy;
-//            deriv(0,0)=3 * M_PI * cos(3* M_PI *tempx) * sin(  M_PI * tempy);//*2
-//            deriv(1,0)= M_PI * cos( M_PI * tempy) * sin(3*M_PI * tempx);//*2
-            val[0]=(tempx*tempx)*(tempy*tempy);// + tempy*tempy;
-            deriv(0,0)=2*tempx*tempy*tempy;//*2
-            deriv(1,0)=2*tempx*tempx*tempy;//*2
+            val[0]= sin(3 * M_PI * tempx) * sin( M_PI * tempy);// + tempy*tempy;
+            deriv(0,0)=3 * M_PI * cos(3* M_PI *tempx) * sin(  M_PI * tempy);//*2
+            deriv(1,0)= M_PI * cos( M_PI * tempy) * sin(3*M_PI * tempx);//*2
+//            val[0]=tempx+tempy;//(tempx*tempx)*(tempy*tempy);// + tempy*tempy;
+//            deriv(0,0)=1;//2*tempx*tempy*tempy;//*2
+//            deriv(1,0)=1;//2*tempx*tempx*tempy;//*2
         };
     mat1->SetForceFunction(force);
     mat1->SetExactSolution(exact);
@@ -105,7 +234,9 @@ int main()
     cmesh.SetMathStatement(6, mat1);
     cmesh.SetMathStatement(5,bc_linha);
 //    int order = 2;
-    cmesh.SetDefaultOrder(2);
+    int order = alldata.sim_order[idata];
+        cmesh.SetDefaultOrder(order);
+//    cmesh.SetDefaultOrder(1);
     cmesh.AutoBuild();
     cmesh.Resequence();
 
@@ -125,12 +256,33 @@ int main()
     //    if (!strcmp("DSolExact", name.c_str())) return EDSolExact;
     postprocess.AppendVariable("Sol");
     postprocess.AppendVariable("SolExact");
-    std::string filevtk = "ProjetoTestTrianOrd2Funcorreta.vtk";
+    std::string filevtk = alldata.vtk_names[idata];//"ProjetoTestTrianOrd2Funcorreta.vtk";
     locAnalysis.PostProcessSolution(filevtk, postprocess);
 
     VecDouble errvec;
     errvec = locAnalysis.PostProcessError(std::cout, postprocess);
+    
+    
+    // Crear un objeto ofstream
+        std::ofstream myfile;
 
+        // Abrir el archivo de texto
+        myfile.open ("example.txt",std::ios_base::app);
+
+        // Verificar si el archivo se abrió correctamente
+        if (!myfile) {
+            std::cout << "No se pudo abrir el archivo.\n";
+            return 1;
+        }
+
+        // Escribir en el archivo
+        myfile << filevtk;
+        myfile << "L2-Norm (u): " << sqrt(errvec[0]);
+        myfile << "L2-Norm (grad u):" << sqrt(errvec[1]);
+        myfile << "H1-Norm (u): " << sqrt(errvec[2]) ;
+
+        // Cerrar el archivo
+        myfile.close();
     return 0;
 }
 //void CaseTwoD(TarefaSimulations alldata, int idata);
