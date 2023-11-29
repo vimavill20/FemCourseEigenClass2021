@@ -63,7 +63,7 @@ int main()
     auto force = [](const VecDouble &x, VecDouble &res)
     {
         const double tempx=x[0], tempy=x[1];
-        res[0]=0;//-(2*tempx*tempx) -(2*tempy*tempy);
+        res[0]=-(2*tempx*tempx) -(2*tempy*tempy);
         //res[0]=10*(M_PI*M_PI)*sin(3*M_PI*tempx)*sin(M_PI*tempy);
         
         
@@ -74,9 +74,9 @@ int main()
 //            val[0]= sin(3 * M_PI * tempx) * sin( M_PI * tempy);// + tempy*tempy;
 //            deriv(0,0)=3 * M_PI * cos(3* M_PI *tempx) * sin(  M_PI * tempy);//*2
 //            deriv(1,0)= M_PI * cos( M_PI * tempy) * sin(3*M_PI * tempx);//*2
-            val[0]= tempx;//(tempx*tempx)*(tempy*tempy);// + tempy*tempy;
-            deriv(0,0)=1;//2*tempx*tempy*tempy;//*2
-            deriv(1,0)=0;//2*tempx*tempx*tempy;//*2
+            val[0]=(tempx*tempx)*(tempy*tempy);// + tempy*tempy;
+            deriv(0,0)=2*tempx*tempy*tempy;//*2
+            deriv(1,0)=2*tempx*tempx*tempy;//*2
         };
     mat1->SetForceFunction(force);
     mat1->SetExactSolution(exact);
