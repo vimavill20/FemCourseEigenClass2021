@@ -155,10 +155,10 @@ VecDouble Analysis::PostProcessError(std::ostream &out, PostProcess &defPostProc
         ervec[i] = sqrt(values[i]);
     }
     // Crear un objeto ofstream
-    std::ofstream myfile;
-
-        // Abrir el archivo de texto
-    myfile.open ("NormasDoerro.txt",std::ios_base::app);
+//    std::ofstream myfile;
+//
+//        // Abrir el archivo de texto
+//    myfile.open ("NormasDoerro.txt",std::ios_base::app);
 
 //        // Verificar si el archivo se abrió correctamente
 //    if (!myfile) {
@@ -167,9 +167,12 @@ VecDouble Analysis::PostProcessError(std::ostream &out, PostProcess &defPostProc
 //    }
 
         // Escribir en el archivo
-    myfile << "L2-Norm (u): " << sqrt(ervec[0]);
-    myfile << "L2-Norm (grad u):" << sqrt(ervec[1]);
-    myfile << "H1-Norm (u): " << sqrt(ervec[2])<<"\n";
+    std::ofstream myfile;
+//    myfile.open ("NormasDoerro.txt",std::ios_base::out);
+    myfile.open ("NormasDoerro.txt",std::ios_base::app);
+    myfile << "L2-Norm (u): " << ervec[0];
+    myfile << " L2-Norm (grad u): " << ervec[1];
+    myfile << " H1-Norm (u): " << ervec[2]<<"\n";
 
         // Cerrar el archivo
     myfile.close();

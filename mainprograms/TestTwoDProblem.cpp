@@ -164,7 +164,10 @@ int main()
     test.vtk_names.push_back("MallaTri_Ref4_ordem2.vtk");
     int nsim= test.vtk_names.size();
     for(int i=0; i<nsim; i++){
+        // Crear un objeto ofstream
+        
         CaseTwoD(test, i);
+    
     }
 }
 void CaseTwoD(AllSimulationData alldata,int idata){
