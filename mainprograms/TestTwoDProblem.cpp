@@ -49,122 +49,120 @@ int main()
 {
     AllSimulationData test;
     std::string common_name="/Users/victorvillegassalabarria/Downloads/MalhasProjeto/";
-          
-           std::string name_mesh1 ="MalhaAnelQuad.msh";
-           std::string name_mesh2 ="MalhaAnelQuadRef1.msh";
-           std::string name_mesh3 ="MalhaAnelQuadRef2.msh";
-           std::string name_mesh4 ="MalhaAnelQuadRef3.msh";
-           std::string name_mesh5 ="MalhaAnelQuadRef4.msh";
-           std::string name_mesh6 ="MalhaAnelTria.msh";
-           std::string name_mesh7 ="MalhaAnelTriaRef1.msh";
-           std::string name_mesh8 ="MalhaAnelTriarRef2.msh";
-           std::string name_mesh9 ="MalhaAnelTriarRef3.msh";
-           std::string name_mesh10="MalhaAnelTriarRef4.msh";
+    std::string name_mesh1 ="MalhaAnelQuad.msh";
+    std::string name_mesh2 ="MalhaAnelQuadRef1.msh";
+    std::string name_mesh3 ="MalhaAnelQuadRef2.msh";
+    std::string name_mesh4 ="MalhaAnelQuadRef3.msh";
+    std::string name_mesh5 ="MalhaAnelQuadRef4.msh";
+    std::string name_mesh6 ="MalhaAnelTria.msh";
+    std::string name_mesh7 ="MalhaAnelTriaRef1.msh";
+    std::string name_mesh8 ="MalhaAnelTriarRef2.msh";
+    std::string name_mesh9 ="MalhaAnelTriarRef3.msh";
+    std::string name_mesh10="MalhaAnelTriarRef4.msh";
     //Simulación 1 malla 1
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name + name_mesh1);
-       test.vtk_names.push_back("MallaQuad_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh1);
+    test.vtk_names.push_back("MallaQuad_ordem1.vtk");
 
        //Simulation2 malla 2
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name + name_mesh2);
-       test.vtk_names.push_back("MallaQuad_Ref1_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh2);
+    test.vtk_names.push_back("MallaQuad_Ref1_ordem1.vtk");
 
        //Simulación 3 malla 3
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name + name_mesh3);
-       test.vtk_names.push_back("MallaQuad_Ref2_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh3);
+    test.vtk_names.push_back("MallaQuad_Ref2_ordem1.vtk");
 
        //Simulation4 malla 4
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name + name_mesh4);
-       test.vtk_names.push_back("MallaQuad_Ref3_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh4);
+    test.vtk_names.push_back("MallaQuad_Ref3_ordem1.vtk");
 
        // funcion 2
        //Simulación 5 malla 5
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name + name_mesh5);
-       test.vtk_names.push_back("MallaQuad_Ref4_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh5);
+    test.vtk_names.push_back("MallaQuad_Ref4_ordem1.vtk");
 
        //Simulation 6 malla 3
-       test.sim_order.push_back(2);
-       test.meshnames.push_back(common_name + name_mesh1);
-       test.vtk_names.push_back("MallaQuad_ordem2.vtk");
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh1);
+    test.vtk_names.push_back("MallaQuad_ordem2.vtk");
 
        //Simulación 7 malla 4
-       test.sim_order.push_back(2);
-       test.meshnames.push_back(common_name + name_mesh2);
-       test.vtk_names.push_back("MallaQuad_Ref1_ordem1.vtk");
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh2);
+    test.vtk_names.push_back("MallaQuad_Ref1_ordem2.vtk");
 
        //Simulation8 malla 4
-       test.sim_order.push_back(2);
-       test.meshnames.push_back(common_name + name_mesh3);
-       test.vtk_names.push_back("MallaQuad_Ref2_ordem2.vtk");
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh3);
+    test.vtk_names.push_back("MallaQuad_Ref2_ordem2.vtk");
 
        // funcion 3
        //Simulación 9 malla 5
-       test.sim_order.push_back(2);
-       test.meshnames.push_back(common_name + name_mesh4);
-       test.vtk_names.push_back("MallaQuad_Ref3_ordem2.vtk");
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh4);
+    test.vtk_names.push_back("MallaQuad_Ref3_ordem2.vtk");
 
        //Simulation10 malla 5
-       test.sim_order.push_back(2);
-       test.meshnames.push_back(common_name + name_mesh5);
-       test.vtk_names.push_back("MallaQuad_Ref4_ordem2.vtk");
+    test.sim_order.push_back(2);
+    test.meshnames.push_back(common_name + name_mesh5);
+    test.vtk_names.push_back("MallaQuad_Ref4_ordem2.vtk");
 
        //Simulación 11 malla 6
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name +name_mesh6);
-       test.vtk_names.push_back("MallaTri_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name +name_mesh6);
+    test.vtk_names.push_back("MallaTri_ordem1.vtk");
 
        //Simulation12 malla 6
-       test.sim_order.push_back(1);
-       test.meshnames.push_back(common_name + name_mesh7);
-       test.vtk_names.push_back("MallaTri_Ref1_ordem1.vtk");
+    test.sim_order.push_back(1);
+    test.meshnames.push_back(common_name + name_mesh7);
+    test.vtk_names.push_back("MallaTri_Ref1_ordem1.vtk");
 
-    // funcion 4
-    //Simulación 13 malla 7
+        // funcion 4
+        //Simulación 13 malla 7
     test.sim_order.push_back(1);
     test.meshnames.push_back(common_name + name_mesh8);
     test.vtk_names.push_back("MallaTri_Ref2_ordem1.vtk");
 
-    //Simulation14 malla 7
+        //Simulation14 malla 7
     test.sim_order.push_back(1);
     test.meshnames.push_back(common_name + name_mesh9);
-    test.vtk_names.push_back("MallaTri_Ref3_ordem2.vtk");
+    test.vtk_names.push_back("MallaTri_Ref3_ordem1.vtk");
 
-    //Simulación 15 malla 8
+        //Simulación 15 malla 8
     test.sim_order.push_back(1);
     test.meshnames.push_back(common_name +name_mesh10);
     test.vtk_names.push_back("MallaTri_Ref4_ordem1.vtk");
 
-    //Simulation16 malla 8
+        //Simulation16 malla 8
     test.sim_order.push_back(2);
     test.meshnames.push_back(common_name + name_mesh6);
     test.vtk_names.push_back("MallaTri_ordem2.vtk");
 
-    // funcion 5
-    //Simulación 17 malla 9
+        // funcion 5
+        //Simulación 17 malla 9
     test.sim_order.push_back(2);
     test.meshnames.push_back(common_name + name_mesh7);
     test.vtk_names.push_back("MallaTri_Ref1_ordem2.vtk");
 
-    //Simulation18 malla 9
+        //Simulation18 malla 9
     test.sim_order.push_back(2);
     test.meshnames.push_back(common_name + name_mesh8);
     test.vtk_names.push_back("MallaTri_Ref2_ordem2.vtk");
 
-    //Simulación 19 malla 10
-    test.sim_order.push_back(3);
+        //Simulación 19 malla 10
+    test.sim_order.push_back(2);
     test.meshnames.push_back(common_name +name_mesh9);
     test.vtk_names.push_back("MallaTri_Ref3_ordem2.vtk");
 
-    //Simulation 20 malla 10
+        //Simulation 20 malla 10
     test.sim_order.push_back(2);
     test.meshnames.push_back(common_name + name_mesh10);
     test.vtk_names.push_back("MallaTri_Ref4_ordem2.vtk");
-    int nsim= test.sim_order.size();
-
+    int nsim= test.vtk_names.size();
     for(int i=0; i<nsim; i++){
         CaseTwoD(test, i);
     }
@@ -235,7 +233,7 @@ void CaseTwoD(AllSimulationData alldata,int idata){
     cmesh.SetMathStatement(5,bc_linha);
 //    int order = 2;
     int order = alldata.sim_order[idata];
-        cmesh.SetDefaultOrder(order);
+    cmesh.SetDefaultOrder(order);
 //    cmesh.SetDefaultOrder(1);
     cmesh.AutoBuild();
     cmesh.Resequence();
@@ -263,27 +261,8 @@ void CaseTwoD(AllSimulationData alldata,int idata){
     errvec = locAnalysis.PostProcessError(std::cout, postprocess);
     
     
-    // Crear un objeto ofstream
-        std::ofstream myfile;
-
-        // Abrir el archivo de texto
-        myfile.open ("example.txt",std::ios_base::app);
-
-        // Verificar si el archivo se abrió correctamente
-        if (!myfile) {
-            std::cout << "No se pudo abrir el archivo.\n";
-            return 1;
-        }
-
-        // Escribir en el archivo
-        myfile << filevtk;
-        myfile << "L2-Norm (u): " << sqrt(errvec[0]);
-        myfile << "L2-Norm (grad u):" << sqrt(errvec[1]);
-        myfile << "H1-Norm (u): " << sqrt(errvec[2]) ;
-
-        // Cerrar el archivo
-        myfile.close();
-    return 0;
+    
+return 0;
 }
 //void CaseTwoD(TarefaSimulations alldata, int idata);
 //int main ()

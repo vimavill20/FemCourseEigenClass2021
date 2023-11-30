@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+#include <iostream>
+#include <fstream>
 #include "Analysis.h"
 #include "Assemble.h"
 #include "CompMesh.h"
@@ -152,7 +154,25 @@ VecDouble Analysis::PostProcessError(std::ostream &out, PostProcess &defPostProc
     for (int i = 0; i < nerrors; i++) {
         ervec[i] = sqrt(values[i]);
     }
+    // Crear un objeto ofstream
+    std::ofstream myfile;
 
+        // Abrir el archivo de texto
+    myfile.open ("NormasDoerro.txt",std::ios_base::app);
+
+//        // Verificar si el archivo se abrió correctamente
+//    if (!myfile) {
+//            std::cout << "No se pudo abrir el archivo.\n";
+//    return 1;
+//    }
+
+        // Escribir en el archivo
+    myfile << "L2-Norm (u): " << sqrt(ervec[0]);
+    myfile << "L2-Norm (grad u):" << sqrt(ervec[1]);
+    myfile << "H1-Norm (u): " << sqrt(ervec[2])<<"\n";
+
+        // Cerrar el archivo
+    myfile.close();
 
     return ervec;
 }
